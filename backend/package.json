@@ -1,0 +1,21 @@
+{
+  "name": "escala_adoracao_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon",
+    "production": "pm2 start loader.js --name backend"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-query-int": "^3.0.0",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.7",
+    "mongoose-paginate": "^5.0.3",
+    "node-restful": "^0.2.6",
+    "nodemon": "^1.19.4",
+    "pm2": "^4.1.2"
+  }
+}
