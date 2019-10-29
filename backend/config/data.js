@@ -8,7 +8,7 @@ const DataSchema = new Schema(
     date: Number,
     hour: String,
     ssid: String,
-    status: String
+    status: Number
   },
   { timestamps: true }
 );
