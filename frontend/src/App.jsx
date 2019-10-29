@@ -9,10 +9,14 @@ import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
 export default class App extends Component {
   
   state = {
-    dados: []
+    dados: [],
+    dataEscolhida: null
     
   }
 
+  myCallbackDia = (data) =>{
+    this.setState({dataEscolhida: data})
+  }
   
   update = (data) => {
     this.setState({dados: data}) 

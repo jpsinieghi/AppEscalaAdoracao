@@ -4,7 +4,7 @@ import {Button} from 'semantic-ui-react'
 export default class Hour extends Component {
     constructor(props){
         super(props)
-        this.state = {dados=[]}
+        this.state = {dados: []}
 
     }
 
@@ -26,8 +26,8 @@ export default class Hour extends Component {
             } else {
                 return(
                 <Button
-                    secondary onClick={() => this.updateState(this.props.data)}>
-                    {this.data}
+                    secondary onClick={() => this.updateState(this.props.dados)}>
+                    {this.props.dados.hora}
                 </Button>)
             }
 

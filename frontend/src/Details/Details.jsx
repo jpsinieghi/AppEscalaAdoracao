@@ -13,24 +13,9 @@ export default class Details extends Component{
         }
     }
 
-
-  
-
-
-  verifyData = sid => {
-      //verificar se tem alguem no horario.. select * from tabela where day === this.props.diaescolhido e hour === this.props.horaescolhido
-      //se nao tiver.. 
-      //<Card>sid + foto padrao + status (optar por 0=nao confirmado ou 1=confirmado)botao salvar (insert um registro no BD com diaescolhido + hora + sid + status</Card>
-
-        //se sid === null entao this.setState(sid:this.props.sidEscolhido)
-  
-        
-
-
-    
-
-
-    if (this.dados.state === null) {
+  verifyData = dados => {
+      
+    if (dados.status === 0) {
         return(
             <Card>
                 <Image src='http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg' wrapped ui={false} />
@@ -68,9 +53,14 @@ export default class Details extends Component{
         
 
         return(
-            <div>
             
+            
+            <div>
+            {this.verifyData(this.props.dados)}
                 <p>{this.props.dados.sid}</p>
+                <p>{this.props.dados.dia}</p>
+                <p>{this.props.dados.hora}</p>
+                <p>{this.props.dados.status}</p>
             
                        
             </div>
