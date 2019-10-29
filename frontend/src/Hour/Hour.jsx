@@ -4,30 +4,30 @@ import {Button} from 'semantic-ui-react'
 export default class Hour extends Component {
     constructor(props){
         super(props)
-        this.state = {sidEscolhida: '', hourEscolhida: ''}
+        this.state = {dados=[]}
 
     }
 
     
-    updateState = (sid, hour) =>{
-        this.setState({sidEscolhida: sid}, this.props.updateSid(sid))
-        this.setState({hourEscolhida: hour}, this.props.updateHour(hour))
+    updateState = (data) =>{
+        this.setState({dados: data}, this.props.update(data))
+        
         
 
     }
     
     statusButton = data => {
-        if (data === 1) {
+        if (data.status === 1) {
             return(
                 <Button 
-                    primary onClick={() => this.updateState(this.props.sid, this.props.hour)}>
-                    {this.props.hora}
+                    primary onClick={() => this.updateState(this.props.data)}>
+                    {this.data}
                 </Button>)
             } else {
                 return(
                 <Button
-                    secondary onClick={() => this.updateState(this.props.sid, this.props.hour)}>
-                    {this.props.hora}
+                    secondary onClick={() => this.updateState(this.props.data)}>
+                    {this.data}
                 </Button>)
             }
 
@@ -36,7 +36,7 @@ export default class Hour extends Component {
     render()
         {
 
-        return(<div>{this.statusButton(this.props.status)}</div>)
+        return(<div>{this.statusButton(this.props.dados)}</div>)
     
     }
 }

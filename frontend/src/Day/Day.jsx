@@ -6,18 +6,12 @@ export default class Day extends Component {
     constructor(props){
         super(props)
         this.state = {
-            horasDia: [ {dia: '1572145200000', hora: '07:00', sid: 1234, status: 1},
-                        {hora: '08:00', sid: 2343, status: 2},
-                        {hora: '09:00', sid: null, status: 1},
-                        {hora: '10:00', sid: 7867, status: 1},
-                        {hora: '11:00', sid: 2986, status: 1},
-                        {hora: '12:00', sid: 1235, status: 2},
-                        {hora: '13:00', sid: 5456, status: 1},
-                        {hora: '14:00', sid: 9834, status: 1},
-                        {hora: '15:00', sid: 2367, status: 1},
-                        {hora: '16:00', sid: 1535, status: 1},
-                        {hora: '17:00', sid: 8876, status: 1},
-                        {hora: '18:00', sid: 4533, status: 1}
+            horasDia: [ {dia: 1572145200000, hora: 7, sid: 1234, status: 1}, //select * from tabela where dia === diaescolhido
+                        {dia: 1572145200000, hora: 8, sid: 2343, status: 2},
+                        {dia: 1572145200000, hora: 9, sid: null, status: 0},
+                        {dia: 1572145200000, hora: 10, sid: 7867, status: 1},
+                        {dia: 1572145200000, hora: 11, sid: 2986, status: 1}
+                        
 
             ],
             horaEscolhida: null
@@ -33,14 +27,12 @@ export default class Day extends Component {
         horas = (
 
             <div>
-                {/* fazer uma funcao que busque no BD hora, sid e status do dia que recebo em this.props.diaEscolhido .. por enquanto uso this.state.horasDia*/}
+               
             {this.state.horasDia.map((data, index) => {
+            
             return <Hour
-                updateSid={this.props.updateSid}
-                updateHour={this.props.updateHour}
-                hora={data.hora}
-                sid={data.sid}
-                status={data.status}
+                update={this.props.update}
+                dados={data}
                 key={index}/>
             })}
             </div>

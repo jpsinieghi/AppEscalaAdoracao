@@ -9,25 +9,16 @@ import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
 export default class App extends Component {
   
   state = {
+    dados: []
     
-    diaEscolhido: null,
-    sidEscolhido: null,
-    hourEscolhido: null
   }
 
   
-  myCallbackDia = (data) => {
-    this.setState({diaEscolhido: data}) 
+  update = (data) => {
+    this.setState({dados: data}) 
   }
 
-  updateSid = (data) => {
-    this.setState({sidEscolhido: data}) 
-  }
-
-  updateHour = (data) => {
-    this.setState({hourEscolhido: data}) 
-  }
-
+  
 
   render(){
       return(<div>
@@ -39,11 +30,11 @@ export default class App extends Component {
             </GridColumn>
          
             <GridColumn>
-              <Day diaEscolhido={this.state.diaEscolhido} updateSid={this.updateSid} updateHour={this.updateHour}/>  
+              <Day update={this.update}/>  
             </GridColumn>
           
             <GridColumn>
-              <Details sidEscolhido={this.state.sidEscolhido} hourEscolhido={this.state.hourEscolhido} />
+              <Details dados={this.state.dados} />
             </GridColumn>
            </Grid>
 
