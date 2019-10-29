@@ -8,7 +8,7 @@ export default class Day extends Component {
         this.state = {
             horasDia: [ {dia: '1572145200000', hora: '07:00', sid: 1234, status: 1},
                         {hora: '08:00', sid: 2343, status: 2},
-                        {hora: '09:00', sid: 6765, status: 1},
+                        {hora: '09:00', sid: null, status: 1},
                         {hora: '10:00', sid: 7867, status: 1},
                         {hora: '11:00', sid: 2986, status: 1},
                         {hora: '12:00', sid: 1235, status: 2},
@@ -36,7 +36,8 @@ export default class Day extends Component {
                 {/* fazer uma funcao que busque no BD hora, sid e status do dia que recebo em this.props.diaEscolhido .. por enquanto uso this.state.horasDia*/}
             {this.state.horasDia.map((data, index) => {
             return <Hour
-                update={this.props.update}
+                updateSid={this.props.updateSid}
+                updateHour={this.props.updateHour}
                 hora={data.hora}
                 sid={data.sid}
                 status={data.status}

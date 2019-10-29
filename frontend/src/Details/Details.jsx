@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { Card, Icon, Image } from 'semantic-ui-react'
+
 
 
 export default class Details extends Component{
@@ -55,8 +57,13 @@ export default class Details extends Component{
     }
 
     axios.post('http://localhost:3001/api/putData', {
-      id: idToBeAdded,
-      message: message,
+      
+      date: this.data.date,
+      hour: this.data.hour,
+      sid: this.data.sid,
+      status: this.data.status
+
+
     });
   };
 
@@ -96,52 +103,61 @@ export default class Details extends Component{
   };
 
 
+  verifyData = sid => {
+      //verificar se tem alguem no horario.. select * from tabela where day === this.props.diaescolhido e hour === this.props.horaescolhido
+      //se nao tiver.. 
+      //<Card>sid + foto padrao + status (optar por 0=nao confirmado ou 1=confirmado)botao salvar (insert um registro no BD com diaescolhido + hora + sid + status</Card>
+
+        //se sid === null entao this.setState(sid:this.props.sidEscolhido)
+        
 
 
+    
 
 
+    if (this.data === null) {
+        return(
+            <Card>
+                <Image src='http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg' wrapped ui={false} />
+                <Card.Content>
+      <Card.Header>Matthew</Card.Header>
+      <Card.Meta>
+        <span className='date'>Joined in 2015</span>
+      </Card.Meta>
+      <Card.Description>
+        Matthew is a musician living in Nashville.
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        <Icon name='user' />
+        22 Friends
+      </a>
+    </Card.Content>
+            
+            </Card>
+            
+            //chamar componente 
+            )
+        } else 
+        {
+            return(
+                <div></div>)
+        }
 
-
-
-
-
+    }
 
 
 
     render(){
-        const {data} = this.state
+        
 
         return(
             <div>
-                <ul>
-
-                {data.length <= 0
-            ? 'NO DB ENTRIES YET'
-            : data.map((dat) => (
-                <li style={{ padding: '10px' }} key={data.message}>
-                  <span style={{ color: 'gray' }}> id: </span> {dat.id} <br />
-                  <span style={{ color: 'gray' }}> data: </span>
-                  {dat.message}
-                </li>
-              ))}
-
-                </ul>
-
-                <div style={{ padding: '10px' }}>
-          <input
-            type="text"
-            onChange={(e) => this.setState({ message: e.target.value })}
-            placeholder="add something in the database"
-            style={{ width: '200px' }}
-          />
-          <button onClick={() => this.putDataToDB(this.state.message)}>
-            ADD
-          </button>
-        </div>
-
-
-
-            <p>{this.props.detalheEscolhido}</p>
+            
+            {/* {this.verifyData(this.props.sidEscolhido)} */}
+            <p>{this.props.sidEscolhido}</p>
+            <p>{this.props.hourEscolhido}</p>
                        
             </div>
 

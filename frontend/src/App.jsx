@@ -11,7 +11,8 @@ export default class App extends Component {
   state = {
     
     diaEscolhido: null,
-    detalheEscolhido: null
+    sidEscolhido: null,
+    hourEscolhido: null
   }
 
   
@@ -19,9 +20,14 @@ export default class App extends Component {
     this.setState({diaEscolhido: data}) 
   }
 
-  update = (data) => {
-    this.setState({detalheEscolhido: data}) 
+  updateSid = (data) => {
+    this.setState({sidEscolhido: data}) 
   }
+
+  updateHour = (data) => {
+    this.setState({hourEscolhido: data}) 
+  }
+
 
   render(){
       return(<div>
@@ -33,11 +39,11 @@ export default class App extends Component {
             </GridColumn>
          
             <GridColumn>
-              <Day diaEscolhido={this.state.diaEscolhido} update={this.update}/>  
+              <Day diaEscolhido={this.state.diaEscolhido} updateSid={this.updateSid} updateHour={this.updateHour}/>  
             </GridColumn>
           
             <GridColumn>
-              <Details detalheEscolhido={this.state.detalheEscolhido} />
+              <Details sidEscolhido={this.state.sidEscolhido} hourEscolhido={this.state.hourEscolhido} />
             </GridColumn>
            </Grid>
 
