@@ -20,8 +20,8 @@ export default class Hour extends Component {
         if (data.status === 1) {
             return(
                 <Button 
-                    primary onClick={() => this.updateState(this.props.data)}>
-                    {this.data}
+                    primary onClick={() => this.updateState(this.props.dados)}>
+                    {this.props.dados.hora}
                 </Button>)
             } else {
                 return(
