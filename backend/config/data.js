@@ -10,7 +10,7 @@ const DataSchema = new Schema(
     sid: Number,
     status: Number
   },
-  { timestamps: true }
+  { collection: 'db_escala' }
 );
 
 // export the new Schema so we could modify it using Node.js

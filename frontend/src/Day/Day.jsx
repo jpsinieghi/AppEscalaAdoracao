@@ -49,7 +49,7 @@ export default class Day extends Component {
     render(){
 
         let horas = null;
-        let horas2 = null;
+        
         
 
         horas = (
@@ -58,27 +58,16 @@ export default class Day extends Component {
                
             {this.state.horasDia.map((data, index) => {
             
-            return <Hour
+            return (<Hour
                 update={this.props.update}
                 dados={data}
                 key={index}/>
-            })}
+            )})}
             </div>
             
         )
 
-        horas2 = (
-
-            <div>
-               
-            {this.state.data.map((data, index) => {
-            
-            return <p>{data}</p>
-            
-            })}
-            </div>
-            
-        )
+        
 
 
     return(
@@ -89,7 +78,7 @@ export default class Day extends Component {
                 <p>DataDB: {this.state.data}</p>
                 
                 {horas}
-                {/* {horas2} */}
+                
 
 
             </div>
