@@ -14,15 +14,43 @@ export default class Day extends Component {
                         
 
             ],
-            horaEscolhida: null
+            diaEscolhido: null,
+            data: [],
+            intervalIsSet: false
         }
     }
    
-    
-   
+    // when component mounts, first thing it does is fetch all existing data in our db
+  // then we incorporate a polling logic so that we can easily see if our db has
+  // changed and implement those changes into our UI
+  componentDidMount() {
+    this.getDataFromDb();
+    if (!this.state.intervalIsSet) {
+      let interval = setInterval(this.getDataFromDb, 10000);
+      this.setState({ intervalIsSet: interval });
+    }
+  }
+
+  // never let a process live forever
+  // always kill a process everytime we are done using it
+  componentWillUnmount() {
+    if (this.state.intervalIsSet) {
+      clearInterval(this.state.intervalIsSet);
+      this.setState({ intervalIsSet: null });
+    }
+  }
+       
+    getDataFromDb = () => {
+        fetch('http://localhost:3001/api/getData')
+          .then((data) => data.json())
+          .then((res) => this.setState({ data: res.data }));
+      };
+
     render(){
 
         let horas = null;
+        let horas2 = null;
+        
 
         horas = (
 
@@ -39,12 +67,29 @@ export default class Day extends Component {
             
         )
 
+        horas2 = (
+
+            <div>
+               
+            {this.state.data.map((data, index) => {
+            
+            return <p>{data}</p>
+            
+            })}
+            </div>
+            
+        )
+
 
     return(
             <div className="Day"> 
+
+                        
+                <p>Data Escolhida: {this.props.dataEscolhida}</p>
+                <p>DataDB: {this.state.data}</p>
                 
-                <p>{this.props.diaEscolhido}</p>
                 {horas}
+                {/* {horas2} */}
 
 
             </div>

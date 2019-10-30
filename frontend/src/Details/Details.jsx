@@ -15,12 +15,12 @@ export default class Details extends Component{
 
   verifyData = dados => {
       
-    if (dados.status === 0) {
+    // if (dados.status === 0) {
         return(
             <Card>
                 <Image src='http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg' wrapped ui={false} />
                 <Card.Content>
-      <Card.Header>Matthew</Card.Header>
+      <Card.Header>{this.props.dados.sid}</Card.Header>
       <Card.Meta>
         <span className='date'>Joined in 2015</span>
       </Card.Meta>
@@ -39,11 +39,7 @@ export default class Details extends Component{
             
             //chamar componente 
             )
-        } else 
-        {
-            return(
-                <div></div>)
-        }
+        // } 
 
     }
 

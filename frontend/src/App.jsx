@@ -10,7 +10,15 @@ export default class App extends Component {
   
   state = {
     dados: [],
-    dataEscolhida: null
+    dataEscolhida: null,
+    allAdoradores: [ 
+      {sid: 1234, name: 'Joao Paulo', whats: '12974068788'},
+      {sid: 1235, name: 'Ana Luiza', whats: '12988786855'},
+      {sid: 1236, name: 'Pedro Henrique', whats: '12987665432'},
+      {sid: 1237, name: 'Fernando Silva', whats: '12976867896'}
+    ]
+      
+
     
   }
 
@@ -25,6 +33,8 @@ export default class App extends Component {
   
 
   render(){
+      
+      
       return(<div>
         <Header as="h3">Escada de Adoração da Comunidade Canção Nova</Header>
         <Segment>
@@ -34,11 +44,11 @@ export default class App extends Component {
             </GridColumn>
          
             <GridColumn>
-              <Day update={this.update}/>  
+              <Day update={this.update} dataEscolhida={this.state.dataEscolhida}/>  
             </GridColumn>
           
             <GridColumn>
-              <Details dados={this.state.dados} />
+              <Details dados={this.state.dados} allAdoradores={this.state.allAdoradores}/>
             </GridColumn>
            </Grid>
 
