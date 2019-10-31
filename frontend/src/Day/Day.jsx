@@ -7,7 +7,6 @@ export default class Day extends Component {
     constructor(props){
         super(props)
         this.state = {
-           dataEscolhida: null,
            data: [],
            intervalIsSet: false
         }
@@ -52,7 +51,7 @@ export default class Day extends Component {
 
     render(){
 
-      
+      //para uso de verificação dos dados que chegam do BD
       let returnData = (
       
         
@@ -93,7 +92,7 @@ export default class Day extends Component {
 
                         
                 <p>Data Escolhida: {this.props.dataEscolhida}</p>
-                <p>Data Escolhida: {this.state.dataEscolhida}</p>
+                
 
 
                 {returnData}
