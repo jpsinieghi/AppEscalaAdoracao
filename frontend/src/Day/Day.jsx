@@ -1,23 +1,18 @@
 import React, {Component} from 'react';
 import Hour from '../Hour/Hour';
+import axios from 'axios';
 
 
 export default class Day extends Component {
     constructor(props){
         super(props)
         this.state = {
-            horasDia: [ {dia: 1572145200000, hora: 7, sid: 1234, status: 1}, //select * from tabela where dia === diaescolhido
-                        {dia: 1572145200000, hora: 8, sid: null, status: 0},
-                        {dia: 1572145200000, hora: 9, sid: null, status: 0},
-                        {dia: 1572145200000, hora: 10, sid: 7867, status: 1},
-                        {dia: 1572145200000, hora: 11, sid: 2986, status: 1}
-                        
-
-            ],
-            diaEscolhido: null,
-            data: [],
-            intervalIsSet: false
+           dataEscolhida: null,
+           data: [],
+           intervalIsSet: false
         }
+        
+
     }
    
     // when component mounts, first thing it does is fetch all existing data in our db
@@ -28,6 +23,8 @@ export default class Day extends Component {
     if (!this.state.intervalIsSet) {
       let interval = setInterval(this.getDataFromDb, 10000);
       this.setState({ intervalIsSet: interval });
+      
+      
     }
   }
 
@@ -40,29 +37,50 @@ export default class Day extends Component {
     }
   }
        
+  setdataEscolhida = data =>{
+    this.setState({ dataEscolhida: data})
+  }  
+
     getDataFromDb = () => {
-        fetch('http://localhost:3001/api/getData')
+         fetch('http://localhost:3001/api/getData')
+        
           .then((data) => data.json())
           .then((res) => this.setState({ data: res.data }));
-      };
+          
+      
+        };
 
     render(){
 
-        let horas = null;
+      
+      let returnData = (
+      
         
-        
+              <ul>
+              
+              {this.state.data.map(dado => 
+                
+                <li>"_id":{dado._id} , "dia":{dado.dia} , "hora": {dado.hora} , "sid": {dado.sid} , "status": {dado.status}</li>
+              
+              )}</ul>
 
-        horas = (
+      
+      )
+      
+
+      let horas = (
 
             <div>
                
-            {this.state.horasDia.map((data, index) => {
+            {this.state.data.map((data, index) => {
+            // if(data.dia === this.props.dataEscolhida){
+            return (
             
-            return (<Hour
+            <Hour
                 update={this.props.update}
                 dados={data}
                 key={index}/>
-            )})}
+                  )})}
             </div>
             
         )
@@ -75,11 +93,11 @@ export default class Day extends Component {
 
                         
                 <p>Data Escolhida: {this.props.dataEscolhida}</p>
-                <p>DataDB: {this.state.data}</p>
-                
-                {horas}
-                
+                <p>Data Escolhida: {this.state.dataEscolhida}</p>
 
+
+                {returnData}
+                {horas}
 
             </div>
 

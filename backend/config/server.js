@@ -12,7 +12,8 @@ const router = express.Router();
 
 // this is our MongoDB database
 const dbRoute =
-  'mongodb+srv://escala:j127px35a@cluster0-ckfvn.mongodb.net/escala';
+  // 'mongodb+srv://escala:j127px35a@cluster0-ckfvn.mongodb.net/escala';
+  'mongodb://localhost/escala';
 
 // connects our back end code with the database
 mongoose.connect(dbRoute, { useNewUrlParser: true });
@@ -32,9 +33,10 @@ app.use(logger('dev'));
 
 // this is our get method
 // this method fetches all available data in our database
-router.get('/getData', (req, res) => {
+router.get('/getData',(req, res) => {
   Data.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
+    // return res.json({ success: true, data: data });
     return res.json({ success: true, data: data });
   });
 });
