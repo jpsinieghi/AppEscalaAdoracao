@@ -66,14 +66,17 @@ export default class Day extends Component {
       
       )
       
+      let horas
 
-      let horas = (
+      if(this.props.dataEscolhida === null){
+        horas = (<div>Escolha um dia no Calendario</div>)
+      }else{
+        horas = (
 
             <div>
                
             {this.state.data.map((data, index) => {
-            // if(data.dia === this.props.dataEscolhida){
-            return (
+              return (
             
             <Hour
                 update={this.props.update}
@@ -84,18 +87,19 @@ export default class Day extends Component {
             
         )
 
-        
+      }  
 
 
     return(
+            
+
+
             <div className="Day"> 
 
                         
-                <p>Data Escolhida: {this.props.dataEscolhida}</p>
+                {/* <p>Data Escolhida: {this.props.dataEscolhida}</p> */}
                 
-
-
-                {returnData}
+                {/* {returnData} */}
                 {horas}
 
             </div>

@@ -9,16 +9,8 @@ import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
 export default class App extends Component {
   
   state = {
-    dados: [],
+    dados: null,
     dataEscolhida: null,
-    allAdoradores: [ 
-      {sid: 1234, name: 'Joao Paulo', whats: '12974068788'},
-      {sid: 1235, name: 'Ana Luiza', whats: '12988786855'},
-      {sid: 1236, name: 'Pedro Henrique', whats: '12987665432'},
-      {sid: 1237, name: 'Fernando Silva', whats: '12976867896'}
-    ]
-      
-
     
   }
 
@@ -48,7 +40,7 @@ export default class App extends Component {
             </GridColumn>
           
             <GridColumn>
-              <Details dados={this.state.dados} allAdoradores={this.state.allAdoradores}/>
+              <Details dados={this.state.dados}/>
             </GridColumn>
            </Grid>
 
