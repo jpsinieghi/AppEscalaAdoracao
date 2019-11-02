@@ -8,74 +8,72 @@ export default class Day extends Component {
         super(props)
         this.state = {
            data: [],
-           intervalIsSet: false
+           intervalIsSet: false,
+           estadoInicial : true
         }
-        
-
     }
-   
-    // when component mounts, first thing it does is fetch all existing data in our db
-  // then we incorporate a polling logic so that we can easily see if our db has
-  // changed and implement those changes into our UI
-  componentDidMount() {
-    this.getDataFromDb(this.props.dataEscolhida);
-    // if (!this.state.intervalIsSet) {
-    //   let interval = setInterval(this.getDataFromDb, 10000);
-    //   this.setState({ intervalIsSet: interval });
-      
-      
-    // }
-  }
 
-  // never let a process live forever
-  // always kill a process everytime we are done using it
-  componentWillUnmount() {
-    if (this.state.intervalIsSet) {
-      clearInterval(this.state.intervalIsSet);
-      this.setState({ intervalIsSet: null });
-    }
-  }
-       
-  setdataEscolhida = data =>{
-    this.setState({ dataEscolhida: data})
-  }  
 
-    getDataFromDb = (data) => {
-         fetch('http://localhost:3001/api/getData')
-        
+    getDataFromDb = (date) => {
+        var url = new URL(`http://localhost:3001/api/getData/${date}`)
+        fetch(url)
           .then((data) => data.json())
           .then((res) => this.setState({ data: res.data }));
-          
-      
+        
         };
+
+
+    putDataToDB = (data) => {
+          let currentIds = this.state.data.map((data) => data.id);
+          let idToBeAdded = 0;
+          while (currentIds.includes(idToBeAdded)) {
+            ++idToBeAdded;
+          }
+          
+
+          axios.post('http://localhost:3001/api/putData', {
+            dia: data.dia,
+            hora: data.hora,
+            sid: data.sid,
+            status: data.status
+          });
+        };
+
+    criarHoras = (date) => {
+
+      
+      
+
+    }
 
     render(){
 
-      //para uso de verificação dos dados que chegam do BD
-      let returnData = (
-      
+      if(this.props.dataEscolhida === null){
+        this.criarHoras(this.props.dataEscolhida)
         
-              <ul>
-              
-              {this.state.data.map(dado => 
-                
-                <li>"_id":{dado._id} , "dia":{dado.dia} , "hora": {dado.hora} , "sid": {dado.sid} , "status": {dado.status}</li>
-              
-              )}</ul>
+      }else{
+        this.getDataFromDb(this.props.dataEscolhida);
+        // if (!this.state.intervalIsSet) {
+        //   let interval = setInterval(this.getDataFromDb, 1000);
+        //   this.setState({ intervalIsSet: interval });
+        // }
+    
+      }
 
-      
+
+      let returnData = (
+              <ul>{this.state.data.map(dado => 
+                  <li>"_id":{dado._id} , "dia":{dado.dia} , "hora": {dado.hora} , "sid": {dado.sid} , "status": {dado.status}</li>
+              )}</ul>
       )
       
       let horas
-
       if(this.props.dataEscolhida === null){
         horas = (<div>Escolha um dia no Calendario</div>)
       }else{
         horas = (
 
-            <div>
-               
-            {this.state.data.map((data, index) => {
+            <div>{this.state.data.map((data, index) => {
               return (
             
             <Hour
@@ -92,30 +90,16 @@ export default class Day extends Component {
 
 
     return(
-            
-
-
             <div className="Day"> 
 
-                        
                 <p>Data Escolhida: {this.props.dataEscolhida}</p>
-                
-                {returnData}
                 {horas}
+                {returnData}
 
             </div>
 
-
     )
-
-
     }
-    
-
-
-
-
-
 }
 
 

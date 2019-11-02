@@ -33,10 +33,11 @@ app.use(logger('dev'));
 
 // this is our get method
 // this method fetches all available data in our database
-router.get('/getData',(req, res) => {
-  Data.find({status : req},(err, data) => {
+router.get('/getData/:dataEscolhida',(req, res) => {
+  Data.find({dia : req.params.dataEscolhida},(err, data) => {
     if (err) return res.json({ success: false, error: err });
     // return res.json({ success: true, data: data });
+    console.log(req.params.status)
     return res.json({ success: true, data: data });
   });
 });
@@ -66,16 +67,18 @@ router.delete('/deleteData', (req, res) => {
 router.post('/putData', (req, res) => {
   let data = new Data();
 
-  const { id, message } = req.body;
+  const { dia, hora, sid, status } = req.body;
 
-  if ((!id && id !== 0) || !message) {
-    return res.json({
-      success: false,
-      error: 'INVALID INPUTS',
-    });
-  }
-  data.message = message;
-  data.id = id;
+  // if ((!id && id !== 0) || !message) {
+  //   return res.json({
+  //     success: false,
+  //     error: 'INVALID INPUTS',
+  //   });
+  // }
+  data.dia = dia;
+  data.hora = hora;
+  data.sid = sid;
+  data.status = status;
   data.save((err) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
