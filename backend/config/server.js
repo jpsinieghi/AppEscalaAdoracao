@@ -34,7 +34,7 @@ app.use(logger('dev'));
 // this is our get method
 // this method fetches all available data in our database
 router.get('/getData',(req, res) => {
-  Data.find((err, data) => {
+  Data.find({status : req},(err, data) => {
     if (err) return res.json({ success: false, error: err });
     // return res.json({ success: true, data: data });
     return res.json({ success: true, data: data });

@@ -10,6 +10,7 @@ export default class Hour extends Component {
 
     
     updateState = (data) =>{
+        
         this.setState({dados: data}, this.props.update(data))
         
         

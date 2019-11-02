@@ -18,13 +18,13 @@ export default class Day extends Component {
   // then we incorporate a polling logic so that we can easily see if our db has
   // changed and implement those changes into our UI
   componentDidMount() {
-    this.getDataFromDb();
-    if (!this.state.intervalIsSet) {
-      let interval = setInterval(this.getDataFromDb, 10000);
-      this.setState({ intervalIsSet: interval });
+    this.getDataFromDb(this.props.dataEscolhida);
+    // if (!this.state.intervalIsSet) {
+    //   let interval = setInterval(this.getDataFromDb, 10000);
+    //   this.setState({ intervalIsSet: interval });
       
       
-    }
+    // }
   }
 
   // never let a process live forever
@@ -40,7 +40,7 @@ export default class Day extends Component {
     this.setState({ dataEscolhida: data})
   }  
 
-    getDataFromDb = () => {
+    getDataFromDb = (data) => {
          fetch('http://localhost:3001/api/getData')
         
           .then((data) => data.json())
@@ -81,6 +81,7 @@ export default class Day extends Component {
             <Hour
                 update={this.props.update}
                 dados={data}
+                dataEscolhida={this.props.dataEscolhida}
                 key={index}/>
                   )})}
             </div>
@@ -97,9 +98,9 @@ export default class Day extends Component {
             <div className="Day"> 
 
                         
-                {/* <p>Data Escolhida: {this.props.dataEscolhida}</p> */}
+                <p>Data Escolhida: {this.props.dataEscolhida}</p>
                 
-                {/* {returnData} */}
+                {returnData}
                 {horas}
 
             </div>
