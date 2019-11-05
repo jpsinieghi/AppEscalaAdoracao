@@ -10,6 +10,7 @@ export default class Day extends Component {
            data: [],
            intervalIsSet: false,
            estadoInicial : true,
+           dataEscolhida: 1572577200000
         }
     }
 
@@ -34,7 +35,6 @@ export default class Day extends Component {
         var url = new URL(`http://localhost:3001/api/getData/${date}`)
         fetch(url)
           .then((data) => data.json())
-          // .then((res) => this.setState({ data: res.data },this.verificaNull(this.state.data)));
           .then((res) => this.setState({ data: res.data }));
         
           
@@ -52,17 +52,23 @@ export default class Day extends Component {
           });
         };
 
-    
+        
+
     render(){
 
       let horas
+      const dia = this.props.dataEscolhida
+      
       if(this.state.dataEscolhida === null){
         horas = (<div>Escolha um dia no Calendario</div>)}
 
       if(this.state.dataEscolhida !== this.props.dataEscolhida){
 
+
         //  this.setState({dataEscolhida : this.props.dataEscolhida},this.getDataFromDb(this.state.dataEscolhida))
-         this.setState({dataEscolhida : this.props.dataEscolhida},this.getDataFromDb(1572577200000))
+        this.setState({dataEscolhida : this.props.dataEscolhida})
+        
+        this.getDataFromDb(1572577200000)
         
       }
       
@@ -74,20 +80,20 @@ export default class Day extends Component {
       
       
       
-      //   horas = (
+         horas = (
 
-      //       <div>{this.state.data.map((data, index) => {
-      //         return (
+             <div>{this.state.data.map((data, index) => {
+               return (
             
-      //       <Hour
-      //           update={this.props.update}
-      //           dados={data}
-      //           dataEscolhida={this.props.dataEscolhida}
-      //           key={index}/>
-      //             )})}
-      //       </div>
+             <Hour
+                 update={this.props.update}
+                 dados={data}
+                 dataEscolhida={this.props.dataEscolhida}
+                 key={index}/>
+                   )})}
+             </div>
             
-      //   )
+        )
 
       
 
