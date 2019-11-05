@@ -37,7 +37,7 @@ router.get('/getData/:dataEscolhida',(req, res) => {
   Data.find({dia : req.params.dataEscolhida},(err, data) => {
     if (err) return res.json({ success: false, error: err });
     // return res.json({ success: true, data: data });
-    console.log(req.params.status)
+    console.log(req.params)
     return res.json({ success: true, data: data });
   });
 });

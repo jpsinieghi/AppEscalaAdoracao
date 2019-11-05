@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import Day from './Day/Day'
+import Day2 from './Day/Day2'
 import Details from './Details/Details'
 import Calendar from './Calendar/Calendar'
 import 'semantic-ui-css/semantic.min.css'
@@ -36,7 +36,7 @@ export default class App extends Component {
             </GridColumn>
          
             <GridColumn>
-              <Day update={this.update} dataEscolhida={this.state.dataEscolhida}/>  
+              <Day2 update={this.update} dataEscolhida={this.state.dataEscolhida}/>  
             </GridColumn>
           
             <GridColumn>
