@@ -1,47 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from "../App"
 import Hour from '../Hour/Hour';
 import axios from 'axios';
 
 
-export default function Day(props) {
+export default function Day2() {
    
-  const [date, setDate] = useState(null)
-  
+  const {state, dispatch} = useContext(AppContext);
+
   
 
-  useEffect(() => {
+  // const [date, setDate] = useState(dataEscolhida)
+  // const [dados, setDados] = useState({data: []})
   
-    setDate(props.dataEscolhida)
 
-    })
-
+  // useEffect(() => {
     
-  
-  const [data, setData] = useState({})
-  const [hasError, setErrors] = useState(false)
-  
+  //   const fetchData = async () => {
+  //     const result = await axios(
+  //       `http://localhost:3001/api/getData/${date}`,)
+  //       // `http://localhost:3001/api/getData/1572145200000`,)
+  //       //`https://hn.algolia.com/api/v1/search?query=redux`,)
 
-  async function fetchData(){
-      var url = new URL(`http://localhost:3001/api/getData/${date}`)
-      const res = await fetch(url)
-      res
-      .json()
-      .then(res => setData(res))
-      .catch(err => setErrors(err))
-    }
-    
-    useEffect(() => {  
-      fetchData()})
-  
+  //       setDados(result.data)
+  //   } 
+
+  //   fetchData()},[])
+
+
 
     return(
             <div className="Day"> 
 
-      <span>{JSON.stringify(data)}</span>
+          {/* <ul>
+                {dados.data.map(item => (
+                  <li key={item.id}><a href={item.hora}>{item.sid}</a>
+                  </li>
+                ))}
+          </ul> */}
 
-
-              
-             <p> {date}</p>
+          <p>{state.dataEscolhida}</p>
              
               
 

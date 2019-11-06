@@ -1,37 +1,36 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from "../App"
 import DatePicker, { registerLocale } from "react-datepicker";
 import ptBR from "date-fns/locale/pt-BR"
 import "react-datepicker/dist/react-datepicker.css";
 registerLocale("pt-BR", ptBR); 
 
 
-export default class Calendar extends Component{
-    constructor(props){
-        super(props)
-        this.state = {}
-    }
 
+export default function Calendar() {
     
-       
-    sendData = (data) =>{
-        this.datae = new Date()
-        this.datae = data
-        this.props.myCallBackSendData(this.datae.valueOf()) //   toLocaleDateString());
-    }
+    const {state, dispatch} = useContext(AppContext);
 
-    render(){
-        return(
-            <div className="Calendar">
-            <DatePicker
-                onChange={this.sendData}
-                locale="pt-BR"
-                inline
-                />
-            
-                       
-            </div>
+    const changeInputValue = (newValue) => {
+
+        dispatch({ type: 'UPDATE_INPUT', data: newValue,});
+    };
 
 
-        )
-    }
+
+                    return(
+                            <div className="Calendar">
+                            <DatePicker
+                                //value={state.dataEscolhida}
+                                onChange={changeInputValue}
+                                locale="pt-BR"
+                                inline
+                                />
+                            
+               
+                            </div>
+                    )
+
+
+
 }
