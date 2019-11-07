@@ -32,12 +32,23 @@ export default function Day() {
     return(
             <div className="Day"> 
 
-          <ul>
-                {dados.data.map(item => (
-                  <li key={item.id}><a href={item.hora}>{item.sid}</a>
-                  </li>
-                ))}
-          </ul>
+          
+                
+                
+                {dados.data.map((item, index) => {
+                  return (
+
+                    <p>teste</p>
+                    
+                    // <Hour dados={item} key={index} />
+                  
+                  
+                )})}
+          
+
+
+
+         
 
           <p>{state.inputText}</p>
           <p>{date}</p>
