@@ -1,12 +1,13 @@
 import React, { useReducer } from 'react'
 import './App.css'
-import Day2 from './Day/Day2'
+import Day from './Day/Day'
 import Details from './Details/Details'
 import Calendar from './Calendar/Calendar'
 import 'semantic-ui-css/semantic.min.css'
 import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
 
-
+//Import immutability-helper
+import update from 'immutability-helper';
 
 // Create context object
 export const AppContext = React.createContext();
@@ -14,24 +15,24 @@ export const AppContext = React.createContext();
 // Set up Initial State
 const initialState = {
 
-  dataEscolhida: 'aaa',
+  inputText: null,
+  
 
 };
 
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'UPDATE_INPUT':
-        return {
-         
-          
-          dataEscolhida: action.data
-        };
-        default:
-        return initialState;
+      case 'UPDATE_INPUT':
+          return update(state, { inputText: {$set: action.data}});
+
+
+      default:
+          return initialState;
   }
 }
 
+ 
 
 export default function App () {
    
@@ -40,26 +41,28 @@ export default function App () {
     return(<div>
         <Header as="h3">Escada de Adoração da Comunidade Canção Nova</Header>
         <Segment>
-           <Grid columns={2} relaxed='very'>
+           <Grid columns={3} relaxed='very'>
 
            <AppContext.Provider value={{ state, dispatch }}>
 
             <GridColumn>
-              {/* <Calendar myCallBackSendData={this.myCallbackDia}/> */}
               <Calendar/>
             </GridColumn>
          
-            
-
+           
+           
             <GridColumn>
-              <Day2/>  
+              {state.inputText && <Day />}
+            
+            </GridColumn>
+
+           
+          
+            <GridColumn>
+              <Details/>
             </GridColumn>
 
             </AppContext.Provider>
-          
-            {/* <GridColumn>
-              <Details dados={this.state.dados}/>
-            </GridColumn> */}
            </Grid>
 
           

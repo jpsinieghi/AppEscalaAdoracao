@@ -13,9 +13,8 @@ export default function Calendar() {
 
     const changeInputValue = (newValue) => {
 
-        dispatch({ type: 'UPDATE_INPUT', data: newValue,});
+        dispatch({ type: 'UPDATE_INPUT', data: newValue.valueOf(),});
     };
-
 
 
                     return(
