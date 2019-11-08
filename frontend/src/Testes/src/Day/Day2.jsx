@@ -18,7 +18,7 @@ export default function Day2() {
     
   //   const fetchData = async () => {
   //     const result = await axios(
-  //       `http://localhost:3001/api/getData/${date}`,)
+         //`http://localhost:3001/api/getData/${date}`,)
   //       // `http://localhost:3001/api/getData/1572145200000`,)
   //       //`https://hn.algolia.com/api/v1/search?query=redux`,)
 

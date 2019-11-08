@@ -39,7 +39,7 @@ router.get('/getData/:dataEscolhida',(req, res) => {
     // return res.json({ success: true, data: data });
     console.log(req.params)
     return res.json({ success: true, data: data });
-  });
+  }).sort({ hora: 1});
 });
 
 // this is our update method
@@ -66,7 +66,7 @@ router.delete('/deleteData', (req, res) => {
 // this method adds new data in our database
 router.post('/putData', (req, res) => {
   let data = new Data();
-
+  
   const { dia, hora, sid, status } = req.body;
 
   // if ((!id && id !== 0) || !message) {

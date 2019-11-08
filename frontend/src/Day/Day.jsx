@@ -9,43 +9,43 @@ const HORAS = [8,9,10,11,12,13]
 export default function Day() {
    
   const {state, dispatch} = useContext(AppContext);
-  // const [date, setDate] = useState(null)
+  const [date, setDate] = useState(null)
   const [dados, setDados] = useState({data: []})
   const fetchData = async () => {
     const result = await axios(`http://localhost:3001/api/getData/${state.inputDate}`,)
     setDados(result.data)
   }
-   
+  
+  
+  
   const putData = (data) => {
     // Send a POST request
-     data.map(item => { 
-    
-
-      axios({
-            method: 'post',
-            url: 'http://localhost:3001/api/putData',
-            data: {
-             dia: state.inputDate,
-             hora: item,
-             sid: 0,
-             status: 0
-            },
+        data.map(item => { 
+        axios({
+             method: 'post',
+             url: 'http://localhost:3001/api/putData',
+             data: {
+              dia: state.inputDate,
+              hora: item,
+              sid: 0,
+              status: 0
+             },
             
-         })
+          })
+        })
+    }
+     //chamar uma animaçao de criação
+     
+     
     
-    })
-
-    
-    
-    
-  }
+  
 
   useEffect(() => {fetchData()},[state.inputDate])
 
   if(dados.data.length === 0){
-    return(<div className="Day"><Button primary onClick={() => {putData(HORAS)}}>Criar agenda para este dia</Button></div>)
-  }else{
-    return(<div className="Day">
+    return(<div className="Day"><Button primary onClick={putData(HORAS)}>Criar agenda para este dia</Button></div>)
+        }else{
+            return(<div className="Day">
               {dados.data.map(item => {
                   if(item.status === 1){
                     return(
@@ -54,4 +54,5 @@ export default function Day() {
                     return(
                       <div><Button secondary onClick={() => {}}>{item.hora}</Button></div>)}
                 })}
+  
          </div>)}}
