@@ -11,26 +11,30 @@ export default function Details (){
   
       
     
-        return(
+        return(<div>
 
-            // <Card>
-            //     <Image src='http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg' wrapped ui={false} />
-            //     <Card.Content>
-            //     <Card.Header>{dados.sid}</Card.Header>
-            //     <Card.Meta><span className='date'>{dados.dia}</span></Card.Meta>
-            //     <Card.Description>{dados.hora}</Card.Description>
-            //     </Card.Content>
+             <Card>
+                 <Image src='http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg' wrapped ui={false} />
+                 <Card.Content>
+                 <Card.Header>{state.inputHour.sid}</Card.Header>
+                 <Card.Meta><span className='date'>{state.inputHour.dia}</span></Card.Meta>
+                 <Card.Description>{state.inputHour.hora}</Card.Description>
+                 </Card.Content>
 
-            //     <Card.Content extra>
-            //       <a>
-            //       <Icon name='user' />
-            //       {dados.status}
-            //       </a>
-            //     </Card.Content>
-            // </Card>
+                 <Card.Content extra>
+                   <a>
+                   <Icon name='user' />
+                   {state.inputHour.status}
+                   </a>
+                 </Card.Content>
+             </Card>
+            <p>Teste Details</p>
+            <p>Dia: {state.inputHour.dia}</p>
+            <p>Hora: {state.inputHour.hora}</p>
+            <p>Sid: {state.inputHour.sid}</p>
+            <p>Status: {state.inputHour.status}</p>
             
-            <p>{state.inputText}</p>
-
+            </div>
             )
 
 

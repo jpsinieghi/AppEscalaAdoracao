@@ -15,6 +15,8 @@ export const AppContext = React.createContext();
 // Set up Initial State
 const initialState = {
   inputDate: null,
+  inputHour: [],
+  inputViewDetails: null,
 
 };
 
@@ -23,7 +25,14 @@ function reducer(state, action) {
       case 'UPDATE_INPUT':
           return update(state, { inputDate: {$set: action.data}});
 
+      case 'UPDATE_INPUT_HOUR':
+          return update(state, { inputHour: {$set: action.data}});
 
+      case 'UPDATE_INPUT_VIEW_DETAILS':
+          return update(state, { inputViewDetails: {$set: action.data}});
+  
+          
+  
       default:
           return initialState;
   }
@@ -49,7 +58,7 @@ export default function App () {
             </GridColumn>
 
             <GridColumn>
-              <Details/>
+              {state.inputViewDetails && <Details/>}
             </GridColumn>
 
             </AppContext.Provider>

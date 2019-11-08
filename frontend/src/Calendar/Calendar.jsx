@@ -14,13 +14,13 @@ export default function Calendar() {
     const changeInputValue = (newValue) => {
 
         dispatch({ type: 'UPDATE_INPUT', data: newValue.valueOf(),});
+        dispatch({ type: 'UPDATE_INPUT_HOUR', data: [],});
     };
 
 
                     return(
                             <div className="Calendar">
                             <DatePicker
-                                //value={state.dataEscolhida}
                                 onChange={changeInputValue}
                                 locale="pt-BR"
                                 inline

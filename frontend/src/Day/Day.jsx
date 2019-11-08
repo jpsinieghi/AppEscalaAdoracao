@@ -9,6 +9,14 @@ const HORAS = [8,9,10,11,12,13]
 export default function Day() {
    
   const {state, dispatch} = useContext(AppContext);
+
+  const changeInputValue = (newValue) => {
+
+    dispatch({ type: 'UPDATE_INPUT_HOUR', data: newValue,});
+    dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: 1,});
+
+  };
+
   const [date, setDate] = useState(null)
   const [dados, setDados] = useState({data: []})
   const fetchData = async () => {
@@ -33,6 +41,7 @@ export default function Day() {
             
           })
         })
+
     }
      //chamar uma animaçao de criação
      
@@ -43,16 +52,15 @@ export default function Day() {
   useEffect(() => {fetchData()},[state.inputDate])
 
   if(dados.data.length === 0){
-    return(<div className="Day"><Button primary onClick={putData(HORAS)}>Criar agenda para este dia</Button></div>)
-        }else{
-            return(<div className="Day">
+    return(<div className="Day"><Button primary onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
+  }else{
+    return(<div className="Day">
               {dados.data.map(item => {
                   if(item.status === 1){
                     return(
-                      <div><Button primary onClick={() => {}}>{item.hora}</Button></div>)}
+                      <div><Button primary onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
                   else{
                     return(
-                      <div><Button secondary onClick={() => {}}>{item.hora}</Button></div>)}
+                      <div><Button secondary onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
                 })}
-  
          </div>)}}
