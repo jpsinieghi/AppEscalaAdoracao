@@ -4,6 +4,7 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./data');
+const Membro = require('./membros');
 
 const API_PORT = 3001;
 const app = express();
@@ -42,6 +43,15 @@ router.get('/getData/:dataEscolhida',(req, res) => {
   }).sort({ hora: 1});
 });
 
+router.get('/getMembro/:sid',(req, res) => {
+  Membro.find({sid : req.params.sid},(err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    // return res.json({ success: true, data: data });
+    console.log(req.params)
+    return res.json({ success: true, data: data });
+  });
+});
+
 // this is our update method
 // this method overwrites existing data in our database
 router.post('/updateData', (req, res) => {
@@ -69,12 +79,6 @@ router.post('/putData', (req, res) => {
   
   const { dia, hora, sid, status } = req.body;
 
-  // if ((!id && id !== 0) || !message) {
-  //   return res.json({
-  //     success: false,
-  //     error: 'INVALID INPUTS',
-  //   });
-  // }
   data.dia = dia;
   data.hora = hora;
   data.sid = sid;

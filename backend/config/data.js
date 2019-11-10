@@ -13,5 +13,7 @@ const DataSchema = new Schema(
   { collection: 'db_escala' }
 );
 
+
+
 // export the new Schema so we could modify it using Node.js
 module.exports = mongoose.model("Data", DataSchema);
