@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from "../App"
 import axios from 'axios';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Item } from 'semantic-ui-react'
 
 
 
@@ -9,8 +9,14 @@ export default function Details (){
     
   const {state, dispatch} = useContext(AppContext);
   
-      
+  const changeInputValue = (newValue) => {
+
+    dispatch({ type: 'UPDATE_SIDTONAME', data: newValue,});
     
+
+  };
+
+  
         return(<div>
 
              <Card>
@@ -32,6 +38,12 @@ export default function Details (){
             <p>Dia: {state.inputHour.dia}</p>
             <p>Hora: {state.inputHour.hora}</p>
             <p>Sid: {state.inputHour.sid}</p>
+            
+            
+            <p>Sid: {state.sidtoName.nome}</p>
+
+            
+
             <p>Status: {state.inputHour.status}</p>
             
             </div>

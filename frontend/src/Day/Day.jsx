@@ -10,14 +10,21 @@ export default function Day() {
    
   const {state, dispatch} = useContext(AppContext);
 
+
+
   const changeInputValue = (newValue) => {
 
     dispatch({ type: 'UPDATE_INPUT_HOUR', data: newValue,});
-    dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: 1,});
+    dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: true,});
+    dispatch({ type: 'UPDATE_SIDTONAME', data: [{"_id":"5dc94b8465f541106c9242fc","sid":0,"nome":"SemNome"}],});
+    
+    // fetchSID(newValue)
+    
+    
 
   };
 
-  const [date, setDate] = useState(null)
+  
   const [dados, setDados] = useState({data: []})
   const fetchData = async () => {
     const result = await axios(`http://localhost:3001/api/getData/${state.inputDate}`,)
@@ -25,6 +32,12 @@ export default function Day() {
   }
   
   
+  const fetchSID = async (newValue) => {
+    const result = await axios(`http://localhost:3001/api/getMembro/${newValue.sid}`,)
+    // dispatch({ type: 'UPDATE_SIDTONAME', data: result.data,});
+    dispatch({ type: 'UPDATE_SIDTONAME', data: [{"_id":"5dc94b8465f541106c9242fc","sid":0,"nome":"Sem Nome"}],});
+  }
+
   
   const putData = (data) => {
     // Send a POST request
@@ -45,10 +58,7 @@ export default function Day() {
     }
      //chamar uma animaçao de criação
      
-     
     
-  
-
   useEffect(() => {fetchData()},[state.inputDate])
 
   if(dados.data.length === 0){

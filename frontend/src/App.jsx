@@ -16,7 +16,8 @@ export const AppContext = React.createContext();
 const initialState = {
   inputDate: null,
   inputHour: [],
-  inputViewDetails: null,
+  inputViewDetails: false,
+  sidtoName: []
 
 };
 
@@ -30,8 +31,10 @@ function reducer(state, action) {
 
       case 'UPDATE_INPUT_VIEW_DETAILS':
           return update(state, { inputViewDetails: {$set: action.data}});
-  
-          
+
+      case 'UPDATE_SIDTONAME':
+            return update(state, { sidtoName: {$set: action.data}});
+      
   
       default:
           return initialState;
