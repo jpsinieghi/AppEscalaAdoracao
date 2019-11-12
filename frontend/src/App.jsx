@@ -1,24 +1,28 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import './App.css'
 import Day from './Day/Day'
 import Details from './Details/Details'
 import Calendar from './Calendar/Calendar'
 import 'semantic-ui-css/semantic.min.css'
 import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
+import axios from 'axios';
 
 //Import immutability-helper
 import update from 'immutability-helper';
 
+
 // Create context object
 export const AppContext = React.createContext();
 
+
+export default function App () {
 // Set up Initial State
 const initialState = {
   inputDate: null,
   inputHour: [],
   inputViewDetails: false,
-  sidtoName: []
-
+  todosMembros: []
+ 
 };
 
 function reducer(state, action) {
@@ -32,17 +36,18 @@ function reducer(state, action) {
       case 'UPDATE_INPUT_VIEW_DETAILS':
           return update(state, { inputViewDetails: {$set: action.data}});
 
-      case 'UPDATE_SIDTONAME':
-            return update(state, { sidtoName: {$set: action.data}});
-      
-  
       default:
           return initialState;
   }
 }
 
-export default function App () {
-   
+const fetchData = async () => {
+    const result = await axios(`http://localhost:3001/api/getMembro/`,)
+    initialState.todosMembros = result.data
+  }
+
+useEffect(() => {fetchData()},[])
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
     return(<div>

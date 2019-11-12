@@ -43,14 +43,22 @@ router.get('/getData/:dataEscolhida',(req, res) => {
   }).sort({ hora: 1});
 });
 
-router.get('/getMembro/:sid',(req, res) => {
-  Membro.find({sid : req.params.sid},(err, data) => {
+router.get('/getMembro/',(req, res) => {
+  Membro.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
     // return res.json({ success: true, data: data });
     console.log(req.params)
     return res.json({ success: true, data: data });
   });
 });
+// router.get('/getMembro/:sid',(req, res) => {
+//   Membro.find({sid : req.params.sid},(err, data) => {
+//     if (err) return res.json({ success: false, error: err });
+//     // return res.json({ success: true, data: data });
+//     console.log(req.params)
+//     return res.json({ success: true, data: data });
+//   });
+// });
 
 // this is our update method
 // this method overwrites existing data in our database

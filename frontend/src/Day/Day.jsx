@@ -10,18 +10,11 @@ export default function Day() {
    
   const {state, dispatch} = useContext(AppContext);
 
-
-
   const changeInputValue = (newValue) => {
 
     dispatch({ type: 'UPDATE_INPUT_HOUR', data: newValue,});
     dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: true,});
-    dispatch({ type: 'UPDATE_SIDTONAME', data: [{"_id":"5dc94b8465f541106c9242fc","sid":0,"nome":"SemNome"}],});
     
-    // fetchSID(newValue)
-    
-    
-
   };
 
   
@@ -31,17 +24,9 @@ export default function Day() {
     setDados(result.data)
   }
   
-  
-  const fetchSID = async (newValue) => {
-    const result = await axios(`http://localhost:3001/api/getMembro/${newValue.sid}`,)
-    // dispatch({ type: 'UPDATE_SIDTONAME', data: result.data,});
-    dispatch({ type: 'UPDATE_SIDTONAME', data: [{"_id":"5dc94b8465f541106c9242fc","sid":0,"nome":"Sem Nome"}],});
-  }
-
-  
   const putData = (data) => {
     // Send a POST request
-        data.map(item => { 
+        data.map((item, index) => { 
         axios({
              method: 'post',
              url: 'http://localhost:3001/api/putData',
@@ -51,6 +36,7 @@ export default function Day() {
               sid: 0,
               status: 0
              },
+             key: index
             
           })
         })
@@ -65,12 +51,12 @@ export default function Day() {
     return(<div className="Day"><Button primary onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
   }else{
     return(<div className="Day">
-              {dados.data.map(item => {
+              {dados.data.map((item, index) => {
                   if(item.status === 1){
                     return(
-                      <div><Button primary onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
+                      <div key={index}><Button primary onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
                   else{
                     return(
-                      <div><Button secondary onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
+                      <div key={index}><Button secondary onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
                 })}
          </div>)}}

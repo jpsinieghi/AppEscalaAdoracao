@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from "../App"
 import DatePicker, { registerLocale } from "react-datepicker";
 import ptBR from "date-fns/locale/pt-BR"
@@ -9,7 +9,7 @@ registerLocale("pt-BR", ptBR);
 
 export default function Calendar() {
     
-    const {state, dispatch} = useContext(AppContext);
+    const {dispatch} = useContext(AppContext);
 
     const changeInputValue = (newValue) => {
 
