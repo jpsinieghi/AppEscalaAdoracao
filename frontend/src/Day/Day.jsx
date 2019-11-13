@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from "../App"
 import axios from 'axios';
-import {Button} from 'semantic-ui-react'
+// import {Button} from 'semantic-ui-react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap'
 
 const HORAS = [8,9,10,11,12,13]
 
@@ -47,16 +49,24 @@ export default function Day() {
     
   useEffect(() => {fetchData()},[state.inputDate])
 
-  if(dados.data.length === 0){
-    return(<div className="Day"><Button primary onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
+  
+   if(state.inputViewDay){
+     return(<div><h1>
+      Escolha uma data no Calendário.
+    </h1></div>)
+   }
+   if(dados.data.length === 0){
+    return(<div className="Day"><Button primary size="lg" onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
   }else{
     return(<div className="Day">
               {dados.data.map((item, index) => {
-                  if(item.status === 1){
+                  if(item.status === 0){
                     return(
-                      <div key={index}><Button primary onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
-                  else{
+                      <div key={index}><Button variant="secondary" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
+                  else if(item.status === 1) {
                     return(
-                      <div key={index}><Button secondary onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
+                      <div key={index}><Button variant="warning" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
+                        else {
+                          return(<div key={index}><Button variant="success" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
                 })}
          </div>)}}

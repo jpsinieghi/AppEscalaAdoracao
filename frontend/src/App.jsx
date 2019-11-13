@@ -4,7 +4,11 @@ import Day from './Day/Day'
 import Details from './Details/Details'
 import Calendar from './Calendar/Calendar'
 import 'semantic-ui-css/semantic.min.css'
-import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
+// import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col } from 'react-bootstrap'
+
+
 import axios from 'axios';
 
 //Import immutability-helper
@@ -18,9 +22,10 @@ export const AppContext = React.createContext();
 export default function App () {
 // Set up Initial State
 const initialState = {
-  inputDate: null,
+  inputDate: [],
   inputHour: [],
   inputViewDetails: false,
+  inputViewDay: true,
   todosMembros: []
  
 };
@@ -36,6 +41,9 @@ function reducer(state, action) {
       case 'UPDATE_INPUT_VIEW_DETAILS':
           return update(state, { inputViewDetails: {$set: action.data}});
 
+      case 'UPDATE_INPUT_VIEW_DAYS':
+            return update(state, { inputViewDay: {$set: action.data}});    
+
       default:
           return initialState;
   }
@@ -50,29 +58,46 @@ useEffect(() => {fetchData()},[])
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-    return(<div>
-        <Header as="h3">Escada de Adoração da Comunidade Canção Nova</Header>
-        <Segment>
-           <Grid columns={3} relaxed='very'>
+    // return(<div>
+    //     <Header as="h3">Escada de Adoração da Comunidade Canção Nova</Header>
+    //     <Segment>
+    //        <Grid columns={3} relaxed='very'>
 
-           <AppContext.Provider value={{ state, dispatch }}>
+    //        <AppContext.Provider value={{ state, dispatch }}>
 
-            <GridColumn>
-              <Calendar/>
-            </GridColumn>
+    //         <GridColumn>
+    //           <Calendar/>
+    //         </GridColumn>
            
-            <GridColumn>
-              {state.inputDate && <Day />}
-            </GridColumn>
+    //         <GridColumn>
+    //           {<Day />}
+    //         </GridColumn>
 
-            <GridColumn>
-              {state.inputViewDetails && <Details/>}
-            </GridColumn>
+    //         <GridColumn>
+    //           {state.inputViewDetails && <Details/>}
+    //         </GridColumn>
 
-            </AppContext.Provider>
-           </Grid>
+    //         </AppContext.Provider>
+    //        </Grid>
             
-        </Segment>
-        </div>
-      )
+    //     </Segment>
+    //     </div>
+    //   )
+
+
+    return(<div>
+      
+      <Container>
+          <Row>
+          <AppContext.Provider value={{ state, dispatch }}>
+          <Col><Calendar/></Col>
+          <Col><Day /></Col>
+          <Col>{state.inputViewDetails && <Details/>}</Col>
+          </AppContext.Provider>
+
+          </Row>
+      </Container>
+
+
+    </div>)
 }
