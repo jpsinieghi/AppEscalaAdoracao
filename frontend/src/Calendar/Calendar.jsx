@@ -16,6 +16,7 @@ export default function Calendar() {
         dispatch({ type: 'UPDATE_INPUT', data: newValue.valueOf(),});
         dispatch({ type: 'UPDATE_INPUT_HOUR', data: [],});
         dispatch({ type: 'UPDATE_INPUT_VIEW_DAYS', data: false,});
+        dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: false,});
     };
 
 

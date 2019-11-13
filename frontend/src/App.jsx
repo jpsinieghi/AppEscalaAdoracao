@@ -90,8 +90,8 @@ useEffect(() => {fetchData()},[])
       <Container>
           <Row>
           <AppContext.Provider value={{ state, dispatch }}>
-          <Col><Calendar/></Col>
-          <Col><Day /></Col>
+          <Col md="auto"><Calendar/></Col>
+          <Col md="auto"><Day /></Col>
           <Col>{state.inputViewDetails && <Details/>}</Col>
           </AppContext.Provider>
 

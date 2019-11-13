@@ -19,6 +19,14 @@ export default function Day() {
     
   };
 
+
+  const changeDetails = () => {
+    dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: false,});
+  }
+
+  const changeDays = () => {
+    dispatch({ type: 'UPDATE_INPUT_VIEW_DAYS', data: true,});
+  }
   
   const [dados, setDados] = useState({data: []})
   const fetchData = async () => {
@@ -27,6 +35,7 @@ export default function Day() {
   }
   
   const putData = (data) => {
+        changeDays()
     // Send a POST request
         data.map((item, index) => { 
         axios({
@@ -56,6 +65,7 @@ export default function Day() {
     </h1></div>)
    }
    if(dados.data.length === 0){
+    changeDetails()
     return(<div className="Day"><Button primary size="lg" onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
   }else{
     return(<div className="Day">
