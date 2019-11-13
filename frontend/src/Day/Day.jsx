@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from "../App"
 import axios from 'axios';
-// import {Button} from 'semantic-ui-react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap'
+import { Loader } from 'semantic-ui-react'
 
 const HORAS = [8,9,10,11,12,13]
 
@@ -35,7 +35,9 @@ export default function Day() {
   }
   
   const putData = (data) => {
-        changeDays()
+    //    
+    // const LoaderExampleInlineCentered = () => <Loader active inline='centered' />
+    changeDays()
     // Send a POST request
         data.map((item, index) => { 
         axios({
@@ -51,6 +53,8 @@ export default function Day() {
             
           })
         })
+        
+        
 
     }
      //chamar uma animaçao de criação

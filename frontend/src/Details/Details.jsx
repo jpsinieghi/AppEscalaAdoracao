@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AppContext } from "../App"
 // import { Card, Icon, Image } from 'semantic-ui-react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, ButtonGroup, Alert } from 'react-bootstrap'
 
 
 
@@ -11,15 +11,22 @@ export default function Details (){
     
   const {state} = useContext(AppContext);
 
+
+  const setStatus = (data) => {
+
+
+  }
+
+
   const details = (<div>
 
               
                 <Card.Title>{state.todosMembros.data.map((item, index) => {
                                  if(item.sid === state.inputHour.sid){
                                    return(<div key={index}>{item.nome}</div>)}})}</Card.Title>
-                <Card.Text>                  
-                  Some quick example text to build on the card title and make up the bulk of
-                  the card's content.
+                <Card.Text> ID: {state.inputHour._id}                 
+                  <p>Some quick example text to build on the card title and make up the bulk of
+                  the card's content.</p>
                 </Card.Text>
                 
                 </div>)              
@@ -31,12 +38,18 @@ export default function Details (){
                const Mybuttons = () => {
                     
                 if(state.inputHour.status === 0){
-                    return(<Button variant="primary">Go somewhere</Button>)}
+                    return(<Button variant="primary">Cadastrar Adorador</Button>)}
 
-                else if(state.inputHour.status === 1){
-                    return(<Button variant="warning">Go somewhere</Button>)}
-                }
+                if(state.inputHour.status === 1){
+                    return(<div><Button variant="warning">Confirmar</Button>
+                            <Button variant="danger" onClick={() => setStatus(0)}>Cancelar</Button></div>
+                    )}
                 
+                if(state.inputHour.status === 2){
+                  return(<Alert variant='success'>
+                    Adorador confirmado !!!
+                  </Alert>)}
+              }
 
                     
 
@@ -90,15 +103,18 @@ export default function Details (){
 
           return(<div>
 
-<Card style={{ width: '18rem' }}>
+              <Card style={{ width: '18rem' }}>
               <Card.Img variant="top" src="http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg" />
               <Card.Body>
 
             {details}
+            
+            <ButtonGroup vertical>
             <Mybuttons />
-
+            </ButtonGroup>
+            
             </Card.Body>
-              </Card>
+            </Card>
 
           </div>)
 
