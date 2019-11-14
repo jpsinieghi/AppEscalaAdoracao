@@ -24,9 +24,12 @@ export default function App () {
 const initialState = {
   inputDate: [],
   inputHour: [],
+  inputHourDay: [],
   inputViewDetails: false,
   inputViewDay: true,
-  todosMembros: []
+  todosMembros: [],
+  
+
  
 };
 
@@ -38,12 +41,15 @@ function reducer(state, action) {
       case 'UPDATE_INPUT_HOUR':
           return update(state, { inputHour: {$set: action.data}});
 
+      case 'UPDATE_INPUT_HOUR_DAY':
+          return update(state, { inputHourDay: {$set: action.data}});
+  
       case 'UPDATE_INPUT_VIEW_DETAILS':
           return update(state, { inputViewDetails: {$set: action.data}});
 
       case 'UPDATE_INPUT_VIEW_DAYS':
             return update(state, { inputViewDay: {$set: action.data}});    
-
+      
       default:
           return initialState;
   }

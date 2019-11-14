@@ -14,7 +14,7 @@ export default function Day() {
 
   const changeInputValue = (newValue) => {
 
-    dispatch({ type: 'UPDATE_INPUT_HOUR', data: newValue,});
+    dispatch({ type: 'UPDATE_INPUT_HOUR_DAY', data: newValue,});
     dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: true,});
     
   };
@@ -32,6 +32,7 @@ export default function Day() {
   const fetchData = async () => {
     const result = await axios(`http://localhost:3001/api/getData/${state.inputDate}`,)
     setDados(result.data)
+    dispatch({ type: 'UPDATE_INPUT_HOUR', data: result.data,});
   }
   
   const putData = (data) => {
