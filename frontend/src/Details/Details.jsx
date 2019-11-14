@@ -18,7 +18,8 @@ export default function Details (){
   }
 
 
-  const details = (<div>
+  const Mydetails = () => {
+                return(<div>
 
               
                 <Card.Title>{state.todosMembros.data.map((item, index) => {
@@ -29,27 +30,27 @@ export default function Details (){
                   the card's content.</p>
                 </Card.Text>
                 
-                </div>)              
+                </div>)}              
                
 
             
 
   
-               const Mybuttons = () => {
-                    
-                if(state.inputHour.status === 0){
-                    return(<Button variant="primary">Cadastrar Adorador</Button>)}
+  const Mybuttons = () => {
+        
+    if(state.inputHour.status === 0){
+        return(<Button variant="primary">Cadastrar Adorador</Button>)}
 
-                if(state.inputHour.status === 1){
-                    return(<div><Button variant="warning">Confirmar</Button>
-                            <Button variant="danger" onClick={() => setStatus(0)}>Cancelar</Button></div>
-                    )}
-                
-                if(state.inputHour.status === 2){
-                  return(<Alert variant='success'>
-                    Adorador confirmado !!!
-                  </Alert>)}
-              }
+    if(state.inputHour.status === 1){
+        return(<div><Button variant="warning">Confirmar</Button>
+                <Button variant="danger" onClick={() => setStatus(0)}>Cancelar</Button></div>
+        )}
+    
+    if(state.inputHour.status === 2){
+      return(<Alert variant='success'>
+        Adorador confirmado !!!
+      </Alert>)}
+  }
 
                     
 
@@ -107,8 +108,8 @@ export default function Details (){
               <Card.Img variant="top" src="http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg" />
               <Card.Body>
 
-            {details}
             
+            <Mydetails />
             <ButtonGroup vertical>
             <Mybuttons />
             </ButtonGroup>
