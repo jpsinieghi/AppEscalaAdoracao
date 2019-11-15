@@ -28,7 +28,13 @@ export default function Details (){
     const newData = state.inputHour.slice()
     
     const objIndex = newData.findIndex((obj => obj.hora == newHora));
-    newData[objIndex].status = newStatus
+    if(newStatus === 0){
+      newData[objIndex].sid = 0
+      newData[objIndex].status = newStatus
+    }else{
+      newData[objIndex].status = newStatus
+    }
+    
 
 
     dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
@@ -38,13 +44,14 @@ export default function Details (){
 
   const Mydetails = () => {
     const [data, setData] = useState(0);  
+    const obj = state.inputHour.find(item => item.hora === state.horaEscolhida)
 
       return(<div>
 
       <Card.Title>{state.todosMembros.data.map((item, index) => {
-                        if(item.sid === state.inputHourDay.sid){
+                        if(item.sid === obj.sid){
                           return(<div key={index}>{item.nome}</div>)}})}</Card.Title>
-      <Card.Text> ID: {state.inputHourDay._id}                 
+      <Card.Text> ID: {obj._id}                 
         <p>Some quick example text to build on the card title and make up the bulk of
         the card's content.</p>
       </Card.Text>
@@ -73,52 +80,6 @@ export default function Details (){
         Adorador confirmado !!!
       </Alert>)}
   }
-
-    
-  
-  // const changeInputValue = (newValue) => {
-
-  //   dispatch({ type: 'UPDATE_SIDTONAME', data: newValue,});
-    
-
-  // };
-
-  
-        // return(<div>
-
-        //      <Card>
-        //          <Image src='http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg' wrapped ui={false} />
-        //          <Card.Content>
-        //          <Card.Header>{state.todosMembros.data.map((item, index) => {
-        //                         if(item.sid === state.inputHour.sid){
-        //                           return(<div key={index}>{item.nome}</div>)}})}</Card.Header>
-
-                
-        //          <Card.Meta><span className='date'>{state.inputHour.dia}</span></Card.Meta>
-        //          <Card.Description>{state.inputHour.hora}</Card.Description>
-        //          </Card.Content>
-
-        //          <Card.Content extra>
-        //            <a>
-        //            <Icon name='user' />
-        //            {state.inputHour.status}
-        //            </a>
-        //          </Card.Content>
-        //      </Card>
-        //     <p>Teste Details</p>
-        //     <p>Dia: {state.inputHour.dia}</p>
-        //     <p>Hora: {state.inputHour.hora}</p>
-        //     <>{state.todosMembros.data.map((item, index) => {
-        //     if(item.sid === state.inputHour.sid){
-        //       return(<p key={index}>Nome: {item.nome}</p>)
-        //     }
-
-        //   })}</>
-
-        //     <p>Status: {state.inputHour.status}</p>
-            
-        //     </div>
-        //     )
 
       return(<div>
 
