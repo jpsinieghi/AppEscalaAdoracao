@@ -19,24 +19,26 @@ export default function Details (){
     
   };
 
-  const newStatus = (newValue) => {
-    // dispatch({ type: 'UPDATE_STATUS', data: newValue,});
+
+    const newStatus = (newStatus, newHora) => {
+    
     //atualizar status no mongodb no _id=5dc5b5bbe4d17c26d8938532
     //setCount(count + 1)
+    
+    const newData = state.inputHour.slice()
+    
+    const objIndex = newData.findIndex((obj => obj.hora == newHora));
+    newData[objIndex].status = newStatus
 
-    const newData = [{_id: state.inputHour._id,
-                      dia: state.inputHour.dia,
-                      hora: state.inputHour.hora,
-                      sid: state.inputHour.sid,
-                      status: newValue,
-                      __v: state.inputHour.__v
-                    }]
 
-    dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});              
+    dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
+    
   
   }
 
   const Mydetails = () => {
+    const [data, setData] = useState(0);  
+
       return(<div>
 
       <Card.Title>{state.todosMembros.data.map((item, index) => {
@@ -51,19 +53,22 @@ export default function Details (){
                
 
   const Mybuttons = () => {
+    // const [count, setCount] = useState(state.horaEscolhida);
     
-    if(state.inputHourDay.status === 0){
+    const obj = state.inputHour.find(item => item.hora === state.horaEscolhida)
+    // if(obj){return (<div>Teste: {obj.hora}</div>)}
+    if(obj.status === 0){
         return(<Button variant="primary">Cadastrar Adorador</Button>)}
 
-    if(state.inputHourDay.status === 1){
-        return(<div><Button variant="warning" onClick={() => newStatus(2)}>Confirmar</Button>
-                <Button variant="danger" onClick={() => newStatus(0)}> Cancelar</Button></div>
+    if(obj.status === 1){
+        return(<div><Button variant="warning" onClick={() => newStatus(2,obj.hora)}>Confirmar</Button>
+                <Button variant="danger" onClick={() => newStatus(0,obj.hora)}> Cancelar</Button></div>
                 //chamar funcao que atualiza no BD o status para 0 deste _id
                 //fazer um novo '/getData/:dataEscolhida' ou conseguir setar state.inputHour.status = 0
                 
         )}
     
-    if(state.inputHourDay.status === 2){
+    if(obj.status === 2){
       return(<Alert variant='success'>
         Adorador confirmado !!!
       </Alert>)}

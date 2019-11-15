@@ -28,7 +28,8 @@ const initialState = {
   inputViewDetails: false,
   inputViewDay: true,
   todosMembros: [],
-  
+  horaEscolhida: null,
+  teste: []
 
  
 };
@@ -48,7 +49,14 @@ function reducer(state, action) {
           return update(state, { inputViewDetails: {$set: action.data}});
 
       case 'UPDATE_INPUT_VIEW_DAYS':
-            return update(state, { inputViewDay: {$set: action.data}});    
+            return update(state, { inputViewDay: {$set: action.data}});
+            
+      case 'UPDATE_HORA_ESCOLHIDA':
+            return update(state, { horaEscolhida: {$set: action.data}});
+            
+      case 'TESTE':
+              return update(state, { teste: {$set: action.data}});
+                    
       
       default:
           return initialState;
