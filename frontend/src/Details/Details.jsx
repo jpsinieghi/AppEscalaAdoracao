@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from "../App"
 // import { Card, Icon, Image } from 'semantic-ui-react'
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button, ButtonGroup, Alert, Form} from 'react-bootstrap'
 
@@ -12,12 +13,6 @@ export default function Details (){
   const {state, dispatch} = useContext(AppContext);
   
 
-  const changeInputValue = (newValue) => {
-
-    dispatch({ type: 'UPDATE_INPUT_HOUR_DAY', data: newValue,});
-    dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: true,});
-    
-  };
 
 
     const newStatus = (newStatus, newHora) => {
@@ -36,10 +31,24 @@ export default function Details (){
     }
     
     dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
+    log2BD(newData[objIndex])
     
   }
 
-  
+  const log2BD = (data) =>{
+    
+      axios({
+           method: 'post',
+           url: 'http://localhost:3001/api/putLog',
+           data: {
+            dia: data.dia,
+            hora: data.hora,
+            sid: data.sid,
+            status: data.status
+           }})
+          }
+
+
   const sid2Nome = (data) => {
 
     const objIndex = state.todosMembros.data.findIndex((obj => obj.sid == data));
@@ -62,8 +71,8 @@ export default function Details (){
       return(<div>      
       <Card.Title>{sid2Nome(obj.sid)}</Card.Title>                          
       <Card.Text> ID: {obj._id}                 
-        <p>Some quick example text to build on the card title and make up the bulk of
-        the card's content.</p>
+        Some quick example text to build on the card title and make up the bulk of
+        the card's content.
       </Card.Text>
       </div>)}              
                
@@ -74,13 +83,15 @@ export default function Details (){
 
     const change = (event) =>{
       setValue(event.target.value)
-      //alterar state.inputHour
       const newData = state.inputHour.slice()
       const objIndex = newData.findIndex((obj => obj.hora == state.horaEscolhida));
       newData[objIndex].sid = event.target.value
       newData[objIndex].status = 1
 
       dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
+      //gravar Log no BD
+      log2BD(newData[objIndex])
+      
 
     }
     

@@ -3,7 +3,7 @@ import { AppContext } from "../App"
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap'
-import { Loader } from 'semantic-ui-react'
+
 
 const HORAS = [8,9,10,11,12,13]
 
@@ -13,7 +13,7 @@ export default function Day() {
   const {state, dispatch} = useContext(AppContext);
 
   const changeInputValue = (newValue) => {
-
+    
     dispatch({ type: 'UPDATE_INPUT_HOUR_DAY', data: newValue,});
     dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: true,});
     dispatch({ type: 'UPDATE_HORA_ESCOLHIDA', data: newValue.hora,});
@@ -72,7 +72,7 @@ export default function Day() {
    }
    if(dados.data.length === 0){
     changeDetails()
-    return(<div className="Day"><Button primary size="lg" onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
+    return(<div className="Day"><Button primary="true" size="lg" onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
   }else{
     return(<div className="Day">
               {dados.data.map((item, index) => {

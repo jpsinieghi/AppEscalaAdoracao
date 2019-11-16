@@ -4,6 +4,7 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./data');
+const Log = require('./log');
 const Membro = require('./membros');
 
 const API_PORT = 3001;
@@ -84,6 +85,21 @@ router.delete('/deleteData', (req, res) => {
 // this method adds new data in our database
 router.post('/putData', (req, res) => {
   let data = new Data();
+  
+  const { dia, hora, sid, status } = req.body;
+
+  data.dia = dia;
+  data.hora = hora;
+  data.sid = sid;
+  data.status = status;
+  data.save((err) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+
+router.post('/putLog', (req, res) => {
+  let data = new Log();
   
   const { dia, hora, sid, status } = req.body;
 

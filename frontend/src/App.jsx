@@ -29,7 +29,7 @@ const initialState = {
   inputViewDay: true,
   todosMembros: [],
   horaEscolhida: null,
-  teste: []
+  logEventos: []
 
  
 };
