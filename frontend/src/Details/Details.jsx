@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from "../App"
 // import { Card, Icon, Image } from 'semantic-ui-react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Button, ButtonGroup, Alert } from 'react-bootstrap'
+import { Card, Button, ButtonGroup, Alert, Form} from 'react-bootstrap'
 
 
 
@@ -35,37 +35,60 @@ export default function Details (){
       newData[objIndex].status = newStatus
     }
     
-
-
     dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
     
+  }
+
   
+  const sid2Nome = (data) => {
+
+    const objIndex = state.todosMembros.data.findIndex((obj => obj.sid == data));
+    
+    
+    return(<div>
+      
+            
+      {state.todosMembros.data[objIndex].nome}
+      
+      
+      </div>)
+
   }
 
   const Mydetails = () => {
     const [data, setData] = useState(0);  
     const obj = state.inputHour.find(item => item.hora === state.horaEscolhida)
 
-      return(<div>
-
-      <Card.Title>{state.todosMembros.data.map((item, index) => {
-                        if(item.sid === obj.sid){
-                          return(<div key={index}>{item.nome}</div>)}})}</Card.Title>
+      return(<div>      
+      <Card.Title>{sid2Nome(obj.sid)}</Card.Title>                          
       <Card.Text> ID: {obj._id}                 
         <p>Some quick example text to build on the card title and make up the bulk of
         the card's content.</p>
       </Card.Text>
-      
       </div>)}              
                
 
   const Mybuttons = () => {
-    // const [count, setCount] = useState(state.horaEscolhida);
+    const [cadastrar, setCadastrar] = useState(false)
+    const [value, setValue] = useState(0)
+
+    const change = (event) =>{
+      setValue(event.target.value)
+      //alterar state.inputHour
+      const newData = state.inputHour.slice()
+      const objIndex = newData.findIndex((obj => obj.hora == state.horaEscolhida));
+      newData[objIndex].sid = event.target.value
+      newData[objIndex].status = 1
+
+      dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
+
+    }
     
+    if(!cadastrar){
     const obj = state.inputHour.find(item => item.hora === state.horaEscolhida)
     // if(obj){return (<div>Teste: {obj.hora}</div>)}
     if(obj.status === 0){
-        return(<Button variant="primary">Cadastrar Adorador</Button>)}
+        return(<Button variant="primary" onClick={() => setCadastrar(true)}>Cadastrar Adorador</Button>)}
 
     if(obj.status === 1){
         return(<div><Button variant="warning" onClick={() => newStatus(2,obj.hora)}>Confirmar</Button>
@@ -79,6 +102,23 @@ export default function Details (){
       return(<Alert variant='success'>
         Adorador confirmado !!!
       </Alert>)}
+    }else{
+
+          return(
+             <Form.Group controlId="exampleForm.ControlSelect1">
+             <Form.Label>Example select</Form.Label>
+             <Form.Control as="select" value={value} onChange={change}>
+             {state.todosMembros.data.map((item, index) => {
+               return(<option value={item.sid} key={index}>{item.nome}</option>)
+             })}
+             </Form.Control>
+           </Form.Group>
+          
+          )
+
+    }
+
+
   }
 
       return(<div>

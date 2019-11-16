@@ -49,7 +49,7 @@ router.get('/getMembro/',(req, res) => {
     // return res.json({ success: true, data: data });
     console.log(req.params)
     return res.json({ success: true, data: data });
-  });
+  }).sort({nome: 1});
 });
 // router.get('/getMembro/:sid',(req, res) => {
 //   Membro.find({sid : req.params.sid},(err, data) => {

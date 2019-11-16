@@ -6,7 +6,7 @@ import Calendar from './Calendar/Calendar'
 import 'semantic-ui-css/semantic.min.css'
 // import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Table } from 'react-bootstrap'
 
 
 import axios from 'axios';
@@ -72,34 +72,7 @@ useEffect(() => {fetchData()},[])
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-    // return(<div>
-    //     <Header as="h3">Escada de Adoração da Comunidade Canção Nova</Header>
-    //     <Segment>
-    //        <Grid columns={3} relaxed='very'>
-
-    //        <AppContext.Provider value={{ state, dispatch }}>
-
-    //         <GridColumn>
-    //           <Calendar/>
-    //         </GridColumn>
-           
-    //         <GridColumn>
-    //           {<Day />}
-    //         </GridColumn>
-
-    //         <GridColumn>
-    //           {state.inputViewDetails && <Details/>}
-    //         </GridColumn>
-
-    //         </AppContext.Provider>
-    //        </Grid>
-            
-    //     </Segment>
-    //     </div>
-    //   )
-
-
-    return(<div>
+   return(<div>
       
       <Container>
           <Row>
@@ -110,6 +83,37 @@ useEffect(() => {fetchData()},[])
           </AppContext.Provider>
 
           </Row>
+      </Container>
+      <Container>
+      <Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>Evento</th>
+      <th>Dia</th>
+      <th>Hora</th>
+      <th>Adorador Confirmado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td colSpan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</Table>
       </Container>
 
 
