@@ -22,7 +22,7 @@ export default function Details (){
     
     const newData = state.inputHour.slice()
     
-    const objIndex = newData.findIndex((obj => obj.hora == newHora));
+    const objIndex = newData.findIndex((obj => obj.hora === newHora));
     if(newStatus === 0){
       newData[objIndex].sid = 0
       newData[objIndex].status = newStatus
@@ -50,24 +50,15 @@ export default function Details (){
 
 
   const sid2Nome = (data) => {
-
     const objIndex = state.todosMembros.data.findIndex((obj => obj.sid == data));
-    
-    
     return(<div>
-      
-            
       {state.todosMembros.data[objIndex].nome}
-      
-      
-      </div>)
-
+    </div>)
   }
 
   const Mydetails = () => {
     const [data, setData] = useState(0);  
     const obj = state.inputHour.find(item => item.hora === state.horaEscolhida)
-
       return(<div>      
       <Card.Title>{sid2Nome(obj.sid)}</Card.Title>                          
       <Card.Text> ID: {obj._id}                 
@@ -80,33 +71,24 @@ export default function Details (){
   const Mybuttons = () => {
     const [cadastrar, setCadastrar] = useState(false)
     const [value, setValue] = useState(0)
-
     const change = (event) =>{
       setValue(event.target.value)
       const newData = state.inputHour.slice()
       const objIndex = newData.findIndex((obj => obj.hora == state.horaEscolhida));
       newData[objIndex].sid = event.target.value
       newData[objIndex].status = 1
-
       dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
       //gravar Log no BD
       log2BD(newData[objIndex])
-      
-
     }
     
     if(!cadastrar){
     const obj = state.inputHour.find(item => item.hora === state.horaEscolhida)
-    // if(obj){return (<div>Teste: {obj.hora}</div>)}
     if(obj.status === 0){
         return(<Button variant="primary" onClick={() => setCadastrar(true)}>Cadastrar Adorador</Button>)}
-
     if(obj.status === 1){
         return(<div><Button variant="warning" onClick={() => newStatus(2,obj.hora)}>Confirmar</Button>
                 <Button variant="danger" onClick={() => newStatus(0,obj.hora)}> Cancelar</Button></div>
-                //chamar funcao que atualiza no BD o status para 0 deste _id
-                //fazer um novo '/getData/:dataEscolhida' ou conseguir setar state.inputHour.status = 0
-                
         )}
     
     if(obj.status === 2){
@@ -114,7 +96,6 @@ export default function Details (){
         Adorador confirmado !!!
       </Alert>)}
     }else{
-
           return(
              <Form.Group controlId="exampleForm.ControlSelect1">
              <Form.Label>Example select</Form.Label>
@@ -124,29 +105,20 @@ export default function Details (){
              })}
              </Form.Control>
            </Form.Group>
-          
           )
-
     }
-
-
   }
 
       return(<div>
-
       <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src="http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg" />
       <Card.Body>
-
-
-      <Mydetails />
-      <ButtonGroup vertical>
-      <Mybuttons />
-      </ButtonGroup>
-
+        <Mydetails />
+        <ButtonGroup vertical>
+          <Mybuttons />
+        </ButtonGroup>
       </Card.Body>
       </Card>
-
       </div>)
 
   

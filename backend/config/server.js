@@ -99,19 +99,30 @@ router.post('/putData', (req, res) => {
 });
 
 router.post('/putLog', (req, res) => {
-  let data = new Log();
+  let log = new Log();
   
   const { dia, hora, sid, status } = req.body;
 
-  data.dia = dia;
-  data.hora = hora;
-  data.sid = sid;
-  data.status = status;
-  data.save((err) => {
+  log.dia = dia;
+  log.hora = hora;
+  log.sid = sid;
+  log.status = status;
+  log.save((err) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
   });
 });
+
+router.get('/getLog',(req, res) => {
+  Log.find((err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    // return res.json({ success: true, data: data });
+    console.log(req.params)
+    return res.json({ success: true, data: data });
+  }).sort({_id: -1}).limit(20);
+});
+
+
 
 // append /api for our http requests
 app.use('/api', router);
