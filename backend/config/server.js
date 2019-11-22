@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const requireDir = require('require-dir')
 var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const Data = require('./data');
-const Log = require('./log');
-const Membro = require('./membros');
+const Data = require('../src/models/Data');
+const Log = require('../src/models/Log');
+const Member = require('../src/models/Members');
 
 const API_PORT = 3001;
 const app = express();
@@ -23,6 +24,8 @@ const dbRoute =
 
 // connects our back end code with the database
 mongoose.connect(dbRoute, { useNewUrlParser: true });
+
+requireDir('../src/models')
 
 let db = mongoose.connection;
 
@@ -49,7 +52,7 @@ router.get('/getData/:dataEscolhida',(req, res) => {
 });
 
 router.get('/getMembro/',(req, res) => {
-  Membro.find((err, data) => {
+  Member.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
     // return res.json({ success: true, data: data });
     console.log(req.params)
@@ -57,7 +60,7 @@ router.get('/getMembro/',(req, res) => {
   }).sort({nome: 1});
 });
 // router.get('/getMembro/:sid',(req, res) => {
-//   Membro.find({sid : req.params.sid},(err, data) => {
+//   Member.find({sid : req.params.sid},(err, data) => {
 //     if (err) return res.json({ success: false, error: err });
 //     // return res.json({ success: true, data: data });
 //     console.log(req.params)

@@ -1,8 +1,5 @@
-// /backend/membros.js
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
-const DataMembro = new Schema(
+const DataMembro = new mongoose.Schema(
     {
       sid: Number,
       nome: String
