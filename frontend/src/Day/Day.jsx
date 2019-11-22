@@ -31,7 +31,7 @@ export default function Day() {
   
   const [dados, setDados] = useState({data: []})
   const fetchData = async () => {
-    const result = await axios(`http://localhost:3001/api/getData/${state.inputDate}`,)
+    const result = await axios(`http://localhost:3001/api/data/${state.inputDate}`,)
     setDados(result.data)
     dispatch({ type: 'UPDATE_INPUT_HOUR', data: result.data.data,});
   }
@@ -44,7 +44,7 @@ export default function Day() {
         data.map((item, index) => { 
         axios({
              method: 'post',
-             url: 'http://localhost:3001/api/putData',
+             url: 'http://localhost:3001/api/data',
              data: {
               dia: state.inputDate,
               hora: item,

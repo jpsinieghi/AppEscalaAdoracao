@@ -7,4 +7,4 @@ const DataMembro = new mongoose.Schema(
     { collection: 'membros' }
   );
 
-  module.exports = mongoose.model("Membro", DataMembro);
+  module.exports = mongoose.model("Members", DataMembro);

@@ -39,7 +39,7 @@ export default function Details (){
     
       axios({
            method: 'post',
-           url: 'http://localhost:3001/api/putLog',
+           url: 'http://localhost:3001/api/log',
            data: {
             dia: data.dia,
             hora: data.hora,
@@ -50,9 +50,9 @@ export default function Details (){
 
 
   const sid2Nome = (data) => {
-    const objIndex = state.todosMembros.data.findIndex((obj => obj.sid == data));
+    const objIndex = state.todosMembros.findIndex((obj => obj.sid == data));
     return(<div>
-      {state.todosMembros.data[objIndex].nome}
+      {state.todosMembros[objIndex].nome}
     </div>)
   }
 
@@ -100,7 +100,7 @@ export default function Details (){
              <Form.Group controlId="exampleForm.ControlSelect1">
              <Form.Label>Example select</Form.Label>
              <Form.Control as="select" value={value} onChange={change}>
-             {state.todosMembros.data.map((item, index) => {
+             {state.todosMembros.map((item, index) => {
                return(<option value={item.sid} key={index}>{item.nome}</option>)
              })}
              </Form.Control>
@@ -111,7 +111,7 @@ export default function Details (){
 
       return(<div>
       <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="http://www.nicolaartesacra.com.br/wp-content/uploads/2018/10/S-022-290x290.jpg" />
+      <Card.Img variant="top" src="https://cleofas.com.br/wp-content/uploads/2011/06/jesus_eucaristico1-copia.png" />
       <Card.Body>
         <Mydetails />
         <ButtonGroup vertical>

@@ -64,7 +64,7 @@ function reducer(state, action) {
 }
 
 const fetchData = async () => {
-    const result = await axios(`http://localhost:3001/api/getMembro/`,)
+    const result = await axios(`http://localhost:3001/api/getMembers/`,)
     initialState.todosMembros = result.data
   }
 
