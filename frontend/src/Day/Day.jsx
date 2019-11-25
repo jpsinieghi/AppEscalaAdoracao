@@ -55,17 +55,11 @@ export default function Day() {
             
           })
         })
-        
-        
-
-    }
-     //chamar uma animaçao de criação
-     
-    
+  }
+  
   useEffect(() => {fetchData()},[state.inputDate])
 
-  
-   if(state.inputViewDay){
+  if(state.inputViewDay){
      return(<div><h1>
       Escolha uma data no Calendário.
     </h1></div>)

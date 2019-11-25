@@ -25,6 +25,7 @@ module.exports = {
        
     async update(req, res){
         const data = await Data.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        console.log(req.params)
         return res.json(data)
     }, 
       

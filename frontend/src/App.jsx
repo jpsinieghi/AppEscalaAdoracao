@@ -1,4 +1,10 @@
 import React, { useReducer, useEffect } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css'
 import Day from './Day/Day'
 import Details from './Details/Details'
@@ -20,7 +26,9 @@ export const AppContext = React.createContext();
 
 
 export default function App () {
-// Set up Initial State
+
+
+  // Set up Initial State
 const initialState = {
   inputDate: [],
   inputHour: [],
@@ -54,10 +62,6 @@ function reducer(state, action) {
       case 'UPDATE_HORA_ESCOLHIDA':
             return update(state, { horaEscolhida: {$set: action.data}});
             
-      case 'TESTE':
-              return update(state, { teste: {$set: action.data}});
-                    
-      
       default:
           return initialState;
   }
@@ -75,47 +79,37 @@ useEffect(() => {fetchData()},[])
    return(<div>
       
       <Container>
-          <Row>
-          <AppContext.Provider value={{ state, dispatch }}>
-          <Col md="auto"><Calendar/></Col>
-          <Col md="auto"><Day /></Col>
-          <Col>{state.inputViewDetails && <Details/>}</Col>
-          </AppContext.Provider>
-
-          </Row>
-      </Container>
-      <Container>
-      <Table striped bordered hover>
-  <thead>
-    <tr>
-      <th>Evento</th>
-      <th>Dia</th>
-      <th>Hora</th>
-      <th>Adorador Confirmado</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td colSpan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</Table>
-      </Container>
-
-
+          <Row><Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+            </li>
+            <li>
+            <Link to="/membro">Membro</Link>
+          </li>
+        </ul>
+        <hr />
+        <Switch>
+          <Route exact path="/">
+            <Row>
+            <AppContext.Provider value={{ state, dispatch }}>
+            <Col md="auto"><Calendar/></Col>
+            <Col md="auto"><Day /></Col>
+            <Col>{state.inputViewDetails && <Details/>}</Col>
+            </AppContext.Provider>
+            </Row>
+          </Route>
+        </Switch>
+        <Switch>
+          <Route exact path="/membro">
+            {/* <Home /> */}
+            Membro2
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+    </Row>
+    </Container>
     </div>)
 }

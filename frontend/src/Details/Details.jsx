@@ -13,31 +13,25 @@ export default function Details (){
   const {state, dispatch} = useContext(AppContext);
   
 
-
-
     const newStatus = (newStatus, newHora) => {
     
-    //atualizar status no mongodb no _id=5dc5b5bbe4d17c26d8938532
-    //setCount(count + 1)
-    
-    const newData = state.inputHour.slice()
-    
-    const objIndex = newData.findIndex((obj => obj.hora === newHora));
-    if(newStatus === 0){
-      newData[objIndex].sid = 0
-      newData[objIndex].status = newStatus
-    }else{
-      newData[objIndex].status = newStatus
+     const newData = state.inputHour.slice()
+     const objIndex = newData.findIndex((obj => obj.hora === newHora));
+     if(newStatus === 0){
+       newData[objIndex].sid = 0
+       newData[objIndex].status = newStatus
+     }else{
+       newData[objIndex].status = newStatus
+     }
+     dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
+     updateData(newData[objIndex])
+     log2BD(newData[objIndex])
+     
     }
     
-    dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
-    log2BD(newData[objIndex])
-    
-  }
 
-  const log2BD = (data) =>{
-    
-      axios({
+  const log2BD = async (data) =>{
+       const res = await axios({
            method: 'post',
            url: 'http://localhost:3001/api/log',
            data: {
@@ -46,7 +40,21 @@ export default function Details (){
             sid: data.sid,
             status: data.status
            }})
-          }
+  }
+  
+  const updateData = async (data) => {
+            try {
+                const res = await axios.put(`http://localhost:3001/api/data/${data._id}`, {
+                  dia: data.dia,
+                  hora: data.hora,
+                  sid: data.sid,
+                  status: data.status
+                });
+                console.log(res.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
 
 
   const sid2Nome = (data) => {
@@ -78,8 +86,9 @@ export default function Details (){
       newData[objIndex].sid = event.target.value
       newData[objIndex].status = 1
       dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
-      //gravar Log no BD
+      updateData(newData[objIndex])
       log2BD(newData[objIndex])
+      
     }
     
     if(!cadastrar){
