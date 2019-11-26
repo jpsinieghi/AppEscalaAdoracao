@@ -6,7 +6,7 @@ const DataController = require("./controllers/DataController")
 const LogController = require("./controllers/LogController")
 
 
-routes.get("/getMembers", MemberController.index)
+routes.get("/members", MemberController.index)
 
 
 routes.get("/data/:dataEscolhida", DataController.index)

@@ -9,10 +9,11 @@ import './App.css'
 import Day from './Day/Day'
 import Details from './Details/Details'
 import Calendar from './Calendar/Calendar'
+import Members from './Members/Members'
 import 'semantic-ui-css/semantic.min.css'
 // import { Segment, Header, Grid, GridColumn } from "semantic-ui-react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Table } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 
 import axios from 'axios';
@@ -34,6 +35,7 @@ const initialState = {
   inputHour: [],
   inputHourDay: [],
   inputViewDetails: false,
+  editViewDetails: false,
   inputViewDay: true,
   todosMembros: [],
   horaEscolhida: null,
@@ -56,6 +58,9 @@ function reducer(state, action) {
       case 'UPDATE_INPUT_VIEW_DETAILS':
           return update(state, { inputViewDetails: {$set: action.data}});
 
+      case 'UPDATE_EDIT_VIEW_DETAILS':
+          return update(state, { editViewDetails: {$set: action.data}});
+
       case 'UPDATE_INPUT_VIEW_DAYS':
             return update(state, { inputViewDay: {$set: action.data}});
             
@@ -68,7 +73,7 @@ function reducer(state, action) {
 }
 
 const fetchData = async () => {
-    const result = await axios(`http://localhost:3001/api/getMembers/`,)
+    const result = await axios(`http://localhost:3001/api/members/`,)
     initialState.todosMembros = result.data
   }
 
@@ -77,39 +82,44 @@ useEffect(() => {fetchData()},[])
   const [state, dispatch] = useReducer(reducer, initialState);
 
    return(<div>
-      
+      <AppContext.Provider value={{ state, dispatch }}>
       <Container>
           <Row><Router>
       <div>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="">Home</Link>
             </li>
             <li>
             <Link to="/membro">Membro</Link>
           </li>
         </ul>
         <hr />
+       
         <Switch>
+        
           <Route exact path="/">
             <Row>
-            <AppContext.Provider value={{ state, dispatch }}>
             <Col md="auto"><Calendar/></Col>
             <Col md="auto"><Day /></Col>
             <Col>{state.inputViewDetails && <Details/>}</Col>
-            </AppContext.Provider>
+           
             </Row>
           </Route>
         </Switch>
         <Switch>
           <Route exact path="/membro">
-            {/* <Home /> */}
-            Membro2
+            <Row>
+              <Members />
+            </Row>
           </Route>
+          
         </Switch>
+        
       </div>
     </Router>
     </Row>
     </Container>
+    </AppContext.Provider>
     </div>)
 }

@@ -36,13 +36,13 @@ export default function Day() {
     dispatch({ type: 'UPDATE_INPUT_HOUR', data: result.data.data,});
   }
   
-  const putData = (data) => {
+  const putData = async (data) => {
     //    
     // const LoaderExampleInlineCentered = () => <Loader active inline='centered' />
     changeDays()
     // Send a POST request
-        data.map((item, index) => { 
-        axios({
+    const res = await data.map((item, index) => { 
+         axios({
              method: 'post',
              url: 'http://localhost:3001/api/data',
              data: {
