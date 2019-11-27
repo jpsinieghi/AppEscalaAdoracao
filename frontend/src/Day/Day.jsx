@@ -48,6 +48,8 @@ export default function Day() {
           })
         })
   }
+
+  
   
   useEffect(() => {fetchData()},[state.daySelected])
 
@@ -60,7 +62,7 @@ export default function Day() {
     dispatch({ type: 'SHOWDETAILS', data: false,})
     return(<div className="Day"><Button primary="true" size="lg" onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
   }else{
-    return(<div className="Day">
+    return(<div className="Day"><div>{(new Date(state.daySelected).toLocaleString())}</div>
               {dados.data.map((item, index) => {
                   if(item.status === 0){
                     return(

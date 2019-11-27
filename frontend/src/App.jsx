@@ -38,7 +38,7 @@ const initialState = {
   showmemberDetails: false,
   showHours: false,
   allMembers: [],
-  memberDetail: [],
+  memberDetails: [],
   hourselected: null,
   logEventos: []
 
@@ -60,14 +60,18 @@ function reducer(state, action) {
           return update(state, { showDetails: {$set: action.data}});
 
       case 'SHOWMEMBERDETAILS':
-          return update(state, { showmemberdetails: {$set: action.data}});
+          return update(state, { showmemberDetails: {$set: action.data}});
 
        case 'SHOWHOURS':
              return update(state, { showHours: {$set: action.data}});
             
       case 'HOURSELECTED':
             return update(state, { hourselected: {$set: action.data}});
-            
+      
+      case 'MEMBERDETAILS':
+            return update(state, { memberDetails: {$set: action.data}});
+
+                  
       default:
           return initialState;
   }
@@ -76,6 +80,7 @@ function reducer(state, action) {
 const fetchData = async () => {
     const result = await axios(`http://localhost:3001/api/members/`,)
     initialState.allMembers = result.data
+    
   }
 
 useEffect(() => {fetchData()},[])

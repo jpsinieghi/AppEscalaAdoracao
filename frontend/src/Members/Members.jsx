@@ -10,10 +10,13 @@ export default function Members() {
 
     const {state, dispatch} = useContext(AppContext);
 
-    useEffect(() => {changeDetails(false)},[])
+    // useEffect(() => {changeDetails(false)},[])
 
-    const changeDetails = (data) => {
-        dispatch({ type: 'SHOWMEMBERDETAILS', data: data,});
+    const showmemberDetails = (newData) => {
+        dispatch({ type: 'SHOWMEMBERDETAILS', data: true,});
+        dispatch({ type: 'MEMBERDETAILS', data: newData,});
+               
+        
       }    
 
     return(
@@ -21,7 +24,7 @@ export default function Members() {
         <Col md="auto">
             {state.allMembers.map((item, index) => {
                  if(item.status){
-                    return(<div key={index}><Button variant="success" size="lg" block onClick={() => changeDetails(true)}>{item.nome}</Button></div>)
+                    return(<div key={index}><Button variant="success" size="lg" block onClick={() => showmemberDetails(item)}>{item.nome}</Button></div>)
                     
                 }})}
         </Col>
@@ -29,12 +32,12 @@ export default function Members() {
         <Col md="auto">
         {state.allMembers.map((item, index) => {
                 if(!item.status && item.sid){
-                 return(<div key={index}><Button variant="secondary" size="lg" block onClick={() => changeDetails(true)}>{item.nome}</Button></div>)
+                 return(<div key={index}><Button variant="secondary" size="lg" block onClick={() => showmemberDetails(item)}>{item.nome}</Button></div>)
         }})}
         
         </Col>
 
-        <Col>{state.showmemberDetails && <Detailsmember/>}</Col>
+        <Col><Detailsmember/></Col>
                
 
 
