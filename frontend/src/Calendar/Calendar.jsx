@@ -13,10 +13,10 @@ export default function Calendar() {
 
     const changeInputValue = (newValue) => {
 
-        dispatch({ type: 'UPDATE_INPUT', data: newValue.valueOf(),});
-        dispatch({ type: 'UPDATE_INPUT_HOUR', data: [],});
-        dispatch({ type: 'UPDATE_INPUT_VIEW_DAYS', data: false,});
-        dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: false,});
+        dispatch({ type: 'DAYSELECTED', data: newValue.valueOf(),});
+        // dispatch({ type: 'HOURSOFDAYSELECTED', data: [],});
+        dispatch({ type: 'SHOWHOURS', data: true,});
+        dispatch({ type: 'SHOWDETAILS', data: false,});
     };
 
 

@@ -31,14 +31,15 @@ export default function App () {
 
   // Set up Initial State
 const initialState = {
-  inputDate: [],
-  inputHour: [],
-  inputHourDay: [],
-  inputViewDetails: false,
-  editViewDetails: false,
-  inputViewDay: true,
-  todosMembros: [],
-  horaEscolhida: null,
+  daySelected: [],
+  hoursofdaySelected: [],
+  // hourSelected: [],
+  showDetails: false,
+  showmemberDetails: false,
+  showHours: false,
+  allMembers: [],
+  memberDetail: [],
+  hourselected: null,
   logEventos: []
 
  
@@ -46,26 +47,26 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-      case 'UPDATE_INPUT':
-          return update(state, { inputDate: {$set: action.data}});
+      case 'DAYSELECTED':
+          return update(state, { daySelected: {$set: action.data}});
 
-      case 'UPDATE_INPUT_HOUR':
-          return update(state, { inputHour: {$set: action.data}});
+      case 'HOURSOFDAYSELECTED':
+          return update(state, { hoursofdaySelected: {$set: action.data}});
 
-      case 'UPDATE_INPUT_HOUR_DAY':
-          return update(state, { inputHourDay: {$set: action.data}});
+      // case 'HOURSELECTED':
+      //     return update(state, { hourSelected: {$set: action.data}});
   
-      case 'UPDATE_INPUT_VIEW_DETAILS':
-          return update(state, { inputViewDetails: {$set: action.data}});
+      case 'SHOWDETAILS':
+          return update(state, { showDetails: {$set: action.data}});
 
-      case 'UPDATE_EDIT_VIEW_DETAILS':
-          return update(state, { editViewDetails: {$set: action.data}});
+      case 'SHOWMEMBERDETAILS':
+          return update(state, { showmemberdetails: {$set: action.data}});
 
-      case 'UPDATE_INPUT_VIEW_DAYS':
-            return update(state, { inputViewDay: {$set: action.data}});
+       case 'SHOWHOURS':
+             return update(state, { showHours: {$set: action.data}});
             
-      case 'UPDATE_HORA_ESCOLHIDA':
-            return update(state, { horaEscolhida: {$set: action.data}});
+      case 'HOURSELECTED':
+            return update(state, { hourselected: {$set: action.data}});
             
       default:
           return initialState;
@@ -74,7 +75,7 @@ function reducer(state, action) {
 
 const fetchData = async () => {
     const result = await axios(`http://localhost:3001/api/members/`,)
-    initialState.todosMembros = result.data
+    initialState.allMembers = result.data
   }
 
 useEffect(() => {fetchData()},[])
@@ -102,7 +103,7 @@ useEffect(() => {fetchData()},[])
             <Row>
             <Col md="auto"><Calendar/></Col>
             <Col md="auto"><Day /></Col>
-            <Col>{state.inputViewDetails && <Details/>}</Col>
+            <Col>{state.showDetails && <Details/>}</Col>
            
             </Row>
           </Route>

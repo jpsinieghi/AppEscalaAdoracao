@@ -5,9 +5,6 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button, ButtonGroup, Alert, Form} from 'react-bootstrap'
 
-
-
-
 export default function Details (){
     
   const {state, dispatch} = useContext(AppContext);
@@ -15,7 +12,7 @@ export default function Details (){
 
     const newStatus = (newStatus, newHora) => {
     
-     const newData = state.inputHour.slice()
+     const newData = state.hoursofdaySelected.slice()
      const objIndex = newData.findIndex((obj => obj.hora === newHora));
      if(newStatus === 0){
        newData[objIndex].sid = 0
@@ -23,7 +20,7 @@ export default function Details (){
      }else{
        newData[objIndex].status = newStatus
      }
-     dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
+     dispatch({ type: 'HOURSOFDAYSELECTED', data: newData,});
      updateData(newData[objIndex])
      log2BD(newData[objIndex])
      
@@ -58,15 +55,15 @@ export default function Details (){
 
 
   const sid2Nome = (data) => {
-    const objIndex = state.todosMembros.findIndex((obj => obj.sid == data));
+    const objIndex = state.allMembers.findIndex((obj => obj.sid == data));
     return(<div>
-      {state.todosMembros[objIndex].nome}
+      {state.allMembers[objIndex].nome}
     </div>)
   }
 
   const Mydetails = () => {
     const [data, setData] = useState(0);  
-    const obj = state.inputHour.find(item => item.hora === state.horaEscolhida)
+    const obj = state.hoursofdaySelected.find(item => item.hora === state.hourselected)
       return(<div>      
       <Card.Title>{sid2Nome(obj.sid)}</Card.Title>                          
       <Card.Text> ID: {obj._id}                 
@@ -81,18 +78,18 @@ export default function Details (){
     const [value, setValue] = useState(0)
     const change = (event) =>{
       setValue(event.target.value)
-      const newData = state.inputHour.slice()
-      const objIndex = newData.findIndex((obj => obj.hora == state.horaEscolhida));
+      const newData = state.hoursofdaySelected.slice()
+      const objIndex = newData.findIndex((obj => obj.hora == state.hourselected));
       newData[objIndex].sid = event.target.value
       newData[objIndex].status = 1
-      dispatch({ type: 'UPDATE_INPUT_HOUR', data: newData,});
+      dispatch({ type: 'HOURSOFDAYSELECTED', data: newData,});
       updateData(newData[objIndex])
       log2BD(newData[objIndex])
       
     }
     
     if(!cadastrar){
-    const obj = state.inputHour.find(item => item.hora === state.horaEscolhida)
+    const obj = state.hoursofdaySelected.find(item => item.hora === state.hourselected)
     if(obj.status === 0){
         return(<Button variant="primary" onClick={() => setCadastrar(true)}>Cadastrar Adorador</Button>)}
     if(obj.status === 1){
@@ -109,7 +106,7 @@ export default function Details (){
              <Form.Group controlId="exampleForm.ControlSelect1">
              <Form.Label>Example select</Form.Label>
              <Form.Control as="select" value={value} onChange={change}>
-             {state.todosMembros.map((item, index) => {
+             {state.allMembers.map((item, index) => {
                return(<option value={item.sid} key={index}>{item.nome}</option>)
              })}
              </Form.Control>

@@ -13,16 +13,13 @@ export default function Members() {
     useEffect(() => {changeDetails(false)},[])
 
     const changeDetails = (data) => {
-        dispatch({ type: 'UPDATE_EDIT_VIEW_DETAILS', data: data,});
+        dispatch({ type: 'SHOWMEMBERDETAILS', data: data,});
       }    
 
-
-
-    
     return(
         <Row>
         <Col md="auto">
-            {state.todosMembros.map((item, index) => {
+            {state.allMembers.map((item, index) => {
                  if(item.status){
                     return(<div key={index}><Button variant="success" size="lg" block onClick={() => changeDetails(true)}>{item.nome}</Button></div>)
                     
@@ -30,14 +27,14 @@ export default function Members() {
         </Col>
 
         <Col md="auto">
-        {state.todosMembros.map((item, index) => {
+        {state.allMembers.map((item, index) => {
                 if(!item.status && item.sid){
                  return(<div key={index}><Button variant="secondary" size="lg" block onClick={() => changeDetails(true)}>{item.nome}</Button></div>)
         }})}
         
         </Col>
 
-        <Col>{state.editViewDetails && <Detailsmember/>}</Col>
+        <Col>{state.showmemberDetails && <Detailsmember/>}</Col>
                
 
 

@@ -14,39 +14,31 @@ export default function Day() {
 
   const changeInputValue = (newValue) => {
     
-    dispatch({ type: 'UPDATE_INPUT_HOUR_DAY', data: newValue,});
-    dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: true,});
-    dispatch({ type: 'UPDATE_HORA_ESCOLHIDA', data: newValue.hora,});
+    // dispatch({ type: 'HOURSELECTED', data: newValue,});
+    dispatch({ type: 'SHOWDETAILS', data: true,});
+    dispatch({ type: 'HOURSELECTED', data: newValue.hora,});
     
   };
 
 
-  const changeDetails = () => {
-    dispatch({ type: 'UPDATE_INPUT_VIEW_DETAILS', data: false,});
-  }
-
-  const changeDays = () => {
-    dispatch({ type: 'UPDATE_INPUT_VIEW_DAYS', data: true,});
-  }
-  
   const [dados, setDados] = useState({data: []})
   const fetchData = async () => {
-    const result = await axios(`http://localhost:3001/api/data/${state.inputDate}`,)
+    const result = await axios(`http://localhost:3001/api/data/${state.daySelected}`,)
     setDados(result.data)
-    dispatch({ type: 'UPDATE_INPUT_HOUR', data: result.data.data,});
+    dispatch({ type: 'HOURSOFDAYSELECTED', data: result.data.data,});
   }
   
   const putData = async (data) => {
     //    
     // const LoaderExampleInlineCentered = () => <Loader active inline='centered' />
-    changeDays()
+    dispatch({ type: 'SHOWHOURS', data: false,});
     // Send a POST request
     const res = await data.map((item, index) => { 
          axios({
              method: 'post',
              url: 'http://localhost:3001/api/data',
              data: {
-              dia: state.inputDate,
+              dia: state.daySelected,
               hora: item,
               sid: 0,
               status: 0
@@ -57,15 +49,15 @@ export default function Day() {
         })
   }
   
-  useEffect(() => {fetchData()},[state.inputDate])
+  useEffect(() => {fetchData()},[state.daySelected])
 
-  if(state.inputViewDay){
+  if(!state.showHours){
      return(<div><h1>
       Escolha uma data no Calendário.
     </h1></div>)
    }
    if(dados.data.length === 0){
-    changeDetails()
+    dispatch({ type: 'SHOWDETAILS', data: false,})
     return(<div className="Day"><Button primary="true" size="lg" onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
   }else{
     return(<div className="Day">
@@ -79,4 +71,5 @@ export default function Day() {
                         else {
                           return(<div key={index}><Button variant="success" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
                 })}
-         </div>)}}
+         </div>)}
+}
