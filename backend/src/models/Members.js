@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const DataMembro = new mongoose.Schema(
     {
       sid: Number,
-      nome: String
+      nome: String,
+      status: Boolean
     },
     { collection: 'membros' }
   );

@@ -62,14 +62,14 @@ export default function Details (){
   }
 
   const Mydetails = () => {
-    const [data, setData] = useState(0);  
+    
+
     const obj = state.hoursofdaySelected.find(item => item.hora === state.hourselected)
-      return(<div>      
-      <Card.Title>{sid2Nome(obj.sid)}</Card.Title>                          
-      <Card.Text> ID: {obj._id}                 
-        Some quick example text to build on the card title and make up the bulk of
-        the card's content.
-      </Card.Text>
+      return(<div>
+
+      <Card.Title>{sid2Nome(obj.sid)}</Card.Title>
+      
+      <Card.Text>ID da hora: {obj._id} e {() => {if(true){return(<div>Alerta</div>)}}}</Card.Text>
       </div>)}              
                
 
@@ -106,8 +106,10 @@ export default function Details (){
              <Form.Group controlId="exampleForm.ControlSelect1">
              <Form.Label>Example select</Form.Label>
              <Form.Control as="select" value={value} onChange={change}>
+             <option>Escolha um Adorador</option>
              {state.allMembers.map((item, index) => {
-               return(<option value={item.sid} key={index}>{item.nome}</option>)
+               if(item.status){
+                return(<option value={item.sid} key={index}>{item.nome}</option>)}
              })}
              </Form.Control>
            </Form.Group>

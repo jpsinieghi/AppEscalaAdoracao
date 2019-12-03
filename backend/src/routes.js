@@ -7,7 +7,7 @@ const LogController = require("./controllers/LogController")
 
 
 routes.get("/members", MemberController.index)
-
+routes.put("/members/:id", MemberController.update)
 
 routes.get("/data/:dataEscolhida", DataController.index)
 routes.post("/data", DataController.store)

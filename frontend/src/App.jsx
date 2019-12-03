@@ -70,6 +70,10 @@ function reducer(state, action) {
       
       case 'MEMBERDETAILS':
             return update(state, { memberDetails: {$set: action.data}});
+      
+      case 'MEMBERDATA':
+            return update(state, { allMembers: {$set: action.data}});
+      
 
                   
       default:

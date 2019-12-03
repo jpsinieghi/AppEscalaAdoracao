@@ -14,5 +14,12 @@ module.exports = {
         //     return res.json({ success: true, data: data });
         //   }).sort({nome: 1});
         
-    }
+    },
+
+    async update(req, res){
+        const data = await Member.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        console.log(req.params)
+        console.log(req.body)
+        return res.json(data)
+    }, 
 }
