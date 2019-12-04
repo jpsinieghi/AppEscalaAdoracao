@@ -19,7 +19,7 @@ const dbRoute =
   // 'mongodb://10.0.95.202/escala';
 
 // connects our back end code with the database
-mongoose.connect(dbRoute, { useNewUrlParser: true });
+mongoose.connect(dbRoute, { useNewUrlParser: true,  useUnifiedTopology: true });
 
 requireDir('./models')
 

@@ -3,7 +3,8 @@ import { AppContext } from "../App"
 // import { Card, Icon, Image } from 'semantic-ui-react'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Button, ButtonGroup, Alert, Form} from 'react-bootstrap'
+import { Card, Button, ButtonGroup, Alert, Form } from 'react-bootstrap'
+import "./Details.css"
 
 export default function Details (){
     
@@ -55,21 +56,28 @@ export default function Details (){
 
 
   const sid2Nome = (data) => {
-    const objIndex = state.allMembers.findIndex((obj => obj.sid == data));
+    const objIndex = state.allMembers.findIndex((obj => obj.sid == data.sid));
+    if(!state.allMembers[objIndex].status && data.status!==0)
+      {
+        return(<div class="alerta">
+          {state.allMembers[objIndex].nome} (desativado)
+          </div>)
+      }
     return(<div>
       {state.allMembers[objIndex].nome}
     </div>)
-  }
+
+
+}
+
 
   const Mydetails = () => {
-    
-
-    const obj = state.hoursofdaySelected.find(item => item.hora === state.hourselected)
+    const objhour = state.hoursofdaySelected.find(item => item.hora === state.hourselected)
       return(<div>
 
-      <Card.Title>{sid2Nome(obj.sid)}</Card.Title>
+      <Card.Title>{sid2Nome(objhour)}</Card.Title>
       
-      <Card.Text>ID da hora: {obj._id} e {() => {if(true){return(<div>Alerta</div>)}}}</Card.Text>
+  {/* <Card.Text>ID da hora: {objhour._id}</Card.Text> */}
       </div>)}              
                
 
@@ -98,9 +106,11 @@ export default function Details (){
         )}
     
     if(obj.status === 2){
-      return(<Alert variant='success'>
+      return(<div><Alert variant='success'>
         Adorador confirmado !!!
-      </Alert>)}
+      </Alert>
+      {/* <Button variant="primary" onClick={() => setCadastrar(true)}>Sugerir troca</Button> */}
+      </div>)}
     }else{
           return(
              <Form.Group controlId="exampleForm.ControlSelect1">
