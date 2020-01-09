@@ -66,12 +66,12 @@ export default function Day() {
               {dados.data.map((item, index) => {
                   if(item.status === 0){
                     return(
-                      <div key={index}><Button variant="secondary" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
+                      <div key={index}><Button variant="secondary" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)}
                   else if(item.status === 1) {
                     return(
-                      <div key={index}><Button variant="warning" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
+                      <div key={index}><Button variant="warning" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)}
                         else {
-                          return(<div key={index}><Button variant="success" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}</Button></div>)}
+                          return(<div key={index}><Button variant="success" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)}
                 })}
          </div>)}
 }
