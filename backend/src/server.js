@@ -13,10 +13,7 @@ const router = express.Router();
 
 // this is our MongoDB database
 const dbRoute =
-  // 'mongodb+srv://escala:j127px35a@cluster0-ckfvn.mongodb.net/escala';
-  'mongodb://localhost/escala';
-  //'mongodb://10.0.95.202/escala?replicaSet=rs0';
-  // 'mongodb://10.0.95.202/escala';
+  'mongodb://localhost/dbEscala';
 
 // connects our back end code with the database
 mongoose.connect(dbRoute, { useNewUrlParser: true,  useUnifiedTopology: true });

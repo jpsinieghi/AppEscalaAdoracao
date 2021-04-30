@@ -5,7 +5,7 @@ const DataMembro = new mongoose.Schema(
       nome: String,
       status: Boolean
     },
-    { collection: 'membros' }
+    { collection: 'cnMembros' }
   );
 
   module.exports = mongoose.model("Members", DataMembro);

@@ -10,7 +10,7 @@ const DataSchema = new Schema(
     sid: Number,
     status: Number
   },
-  { collection: 'db_escala' }
+  { collection: 'cnData' }
 );
 
 
