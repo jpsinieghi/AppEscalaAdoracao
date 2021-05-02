@@ -6,7 +6,8 @@ module.exports = {
         const data = await Data.find({dia : req.params.dataEscolhida},(err, data) => {
             if (err) return res.json({ success: false, error: err });
             // return res.json({ success: true, data: data });
-            console.log(req.params)
+            //console.log(req.params)
+            console.log(data)
             return res.json({ success: true, data: data });
           }).sort({hora: 1});
        
@@ -35,5 +36,16 @@ module.exports = {
     //     return res.send()
 
     // }
+
+    async schedule(req, res){
+        const data = await Data.find({sid : req.params.sidEscolhida},(err, data) => {
+            if (err) return res.json({ success: false, error: err });
+            // return res.json({ success: true, data: data });
+            //console.log(req.params)
+            console.log(data)
+            return res.json({ success: true, data: data });
+          }).sort({dia: 1});
+       
+    },
 
 }

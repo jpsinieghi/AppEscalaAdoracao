@@ -38,7 +38,8 @@ export default function App() {
     allMembers: [],
     memberDetails: [],
     hourselected: null,
-    logEventos: []
+    logEventos: [],
+    memberSchedule: []
 
 
   };
@@ -72,6 +73,9 @@ export default function App() {
       case 'MEMBERDATA':
         return update(state, { allMembers: { $set: action.data } });
 
+      case 'MEMBERSCHEDULE':
+        return update(state, { memberSchedule: { $set: action.data } });
+
       default:
         return initialState;
     }
@@ -84,9 +88,9 @@ export default function App() {
     const result = await axios(`http://localhost:3001/api/members/`,)
     initialState.allMembers = result.data
   }
-  useEffect(() => { fetchData() }, []) 
-
+  useEffect(() => { fetchData() }, [])
   
+
 
   return (<div>
     <AppContext.Provider value={{ state, dispatch }}>
