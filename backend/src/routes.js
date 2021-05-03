@@ -18,5 +18,4 @@ routes.put("/data/:id", DataController.update)
 routes.post("/log", LogController.store)
 
 
-
 module.exports = routes

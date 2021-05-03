@@ -33,7 +33,26 @@ export default function Detailsmember() {
         }
     };
 
+    const updateSchedule = async (data) => {
+        console.log(data)
+        try {
+            const res = await axios.put(`http://localhost:3001/api/data/${data._id}`, {
+                sid: 0,
+                hora: data.hora,
+                status: 0
+            });
+            console.log(res.data);
+        } catch (err) {
+            console.error(err);
+        }
+        //atualizar o state.memberSchedule
+        const result = await axios(`http://localhost:3001/api/data/schedule/${data.sid}`,)
+        dispatch({ type: 'MEMBERSCHEDULE', data: result.data.data, });
 
+
+
+
+    }
 
 
 
@@ -63,12 +82,16 @@ export default function Detailsmember() {
 
 
                     </Form>
-               
+
                     <p>Datas e horarios de escala</p>
                     {state.memberSchedule.map((item, index) => {
 
                         return (
-                            <div>{(new Date(item.dia).toLocaleString())} as {item.hora}:00</div>
+                            <div key={index}>
+                                {(new Date(item.dia).toLocaleString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }))} as {item.hora}:00
+                                <input type="button" value="Excluir" onClick={() => updateSchedule(item)}></input>
+                            </div>
+
                         )
 
 
