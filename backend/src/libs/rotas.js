@@ -7,8 +7,6 @@ const API_PORT = 3001;
 const app = express();
 app.use(cors());
 const router = express.Router();
-//app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(bodyParser.json());
 app.use(express.json())
 app.use(logger('dev'));
 app.use('/api', require("../routes")),

@@ -10,23 +10,15 @@ import Day from './Day/Day'
 import Details from './Details/Details'
 import Calendar from './Calendar/Calendar'
 import Members from './Members/Members'
+import Atualizacoes from './Atualizacoes/Atualizacoes'
 import 'semantic-ui-css/semantic.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
-
-
-//Import immutability-helper
 import update from 'immutability-helper';
-
-
-// Create context object
 export const AppContext = React.createContext();
 
-
 export default function App() {
-
-
   // Set up Initial State
   const initialState = {
     daySelected: [],
@@ -39,9 +31,8 @@ export default function App() {
     memberDetails: [],
     hourselected: null,
     logEventos: [],
-    memberSchedule: []
-
-
+    memberSchedule: [],
+    atualizacoes: []
   };
 
   function reducer(state, action) {
@@ -75,6 +66,9 @@ export default function App() {
 
       case 'MEMBERSCHEDULE':
         return update(state, { memberSchedule: { $set: action.data } });
+      
+      case 'ATUALIZACOES':
+          return update(state, { atualizacoes: { $set: action.data } });
 
       default:
         return initialState;
@@ -85,27 +79,33 @@ export default function App() {
 
   //Pega todos os Membros por API no Backend para alimentar a variavel initialState.allMembers
   const fetchData = async () => {
-    const result = await axios(`http://localhost:3001/api/members/`,)
-    initialState.allMembers = result.data
+    const members = await axios(`http://localhost:3001/api/members/`,)
+    initialState.allMembers = members.data
+    const atualizacoes = await axios(`http://localhost:3001/api/atualizacoes/`,)
+    initialState.atualizacoes = atualizacoes.data
+    
   }
   useEffect(() => { fetchData() }, [])
   
-
-
   return (<div>
     <AppContext.Provider value={{ state, dispatch }}>
       <Container>
         <Row>
           <Router>
             <div>
-              <ul>
-                <li>
-                  <Link to="">Home</Link>
-                </li>
-                <li>
-                  <Link to="/membro">Membro</Link>
-                </li>
-              </ul>
+              <table>
+                <tl>
+                  <td>
+                    <Link to="">Início</Link>
+                  </td>
+                  <td>
+                    <Link to="/membro">Membro</Link>
+                  </td>
+                  <td>
+                    <Link to="/atualizacoes">Atualizacoes</Link>
+                  </td>
+                </tl>
+              </table>
               <hr />
 
               <Switch>
@@ -126,6 +126,14 @@ export default function App() {
                   </Row>
                 </Route>
 
+              </Switch>
+              <Switch>
+                <Route exact path="/atualizacoes">
+                  <Row>
+                    <Atualizacoes />
+                  </Row>
+
+                </Route>
               </Switch>
 
             </div>

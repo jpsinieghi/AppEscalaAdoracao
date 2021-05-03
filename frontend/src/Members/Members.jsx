@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from "../App"
 import { Button } from 'react-bootstrap'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import Detailsmember from "./Detailsmember"
 import axios from 'axios';
 
@@ -14,7 +14,6 @@ export default function Members() {
         
             //const result = await axios(`http://localhost:3001/api/members/`,)
             const result = await axios(`http://localhost:3001/api/data/schedule/${dado.sid}`,)
-            console.log(result.data.data)
             dispatch({ type: 'MEMBERSCHEDULE', data: result.data.data, });
           
         //return result.data.data

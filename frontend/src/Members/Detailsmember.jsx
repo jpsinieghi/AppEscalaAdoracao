@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from "../App"
-import { Row, Col, Card, Button, ButtonGroup, Alert, Form } from 'react-bootstrap'
+import { Row, Col, Form } from 'react-bootstrap'
 
 import axios from 'axios';
 
@@ -49,12 +49,7 @@ export default function Detailsmember() {
         const result = await axios(`http://localhost:3001/api/data/schedule/${data.sid}`,)
         dispatch({ type: 'MEMBERSCHEDULE', data: result.data.data, });
 
-
-
-
     }
-
-
 
     if (!state.showmemberDetails) {
         return (<div><h1>Escolha um Membro</h1></div>)
@@ -63,9 +58,6 @@ export default function Detailsmember() {
 
 
             {state.memberDetails.nome}
-
-
-
 
             <Row>
                 <Col>
@@ -78,8 +70,6 @@ export default function Detailsmember() {
                             checked={state.memberDetails.status}
                             onChange={handleChange}
                         />
-
-
 
                     </Form>
 
