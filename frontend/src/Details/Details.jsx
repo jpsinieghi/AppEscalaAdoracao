@@ -23,24 +23,7 @@ export default function Details() {
     }
     dispatch({ type: 'HOURSOFDAYSELECTED', data: newData, });
     updateData(newData[objIndex])
-    log2BD(newData[objIndex])
-
-
-  }
-
-
-  const log2BD = async (data) => {
-    await axios({
-      method: 'post',
-      url: 'http://localhost:3001/api/atualizacoes',
-      data: {
-        dia: data.dia,
-        hora: data.hora,
-        sid: data.sid,
-        status: data.status
-      }
-    })
-
+    
   }
 
   const updateData = async (data) => {
@@ -51,11 +34,12 @@ export default function Details() {
         sid: data.sid,
         status: data.status
       });
-      //log2BD(data)
-      //console.log(res.data);
+      
     } catch (err) {
       console.error(err);
     }
+
+    //SELECT * from DATA TOP 20 E colocar em state.atualizacoes
   };
 
 
@@ -97,7 +81,7 @@ export default function Details() {
       newData[objIndex].status = 1
       dispatch({ type: 'HOURSOFDAYSELECTED', data: newData, });
       updateData(newData[objIndex])
-      log2BD(newData[objIndex])
+      
       
 
     }
@@ -123,7 +107,7 @@ export default function Details() {
     } else {
       return (
         <Form.Group controlId="exampleForm.ControlSelect1">
-          <Form.Label>Example select</Form.Label>
+          
           <Form.Control as="select" value={value} onChange={change}>
             <option>Escolha um Adorador</option>
             {state.allMembers.map((item, index) =>{

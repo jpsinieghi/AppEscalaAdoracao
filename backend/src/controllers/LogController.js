@@ -9,11 +9,11 @@ module.exports = {
     },
     
     async index(req, res){
-        const data = await Log.find().sort({_id: -1})
+        const data = await Log.find({$or: [ {status: 2},{status: 0}]}).sort({_id: -1})
         return res.json(data)
 
     },
-
+//findById
 
 }
 

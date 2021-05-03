@@ -12,9 +12,10 @@ routes.get("/data/:dataEscolhida", DataController.index)
 routes.get("/data/schedule/:sidEscolhida", DataController.schedule)
 routes.post("/data", DataController.store)
 routes.put("/data/:id", DataController.update)
-//routes.delete("/data/:id", DataController.destroy) 
 
-routes.post("/atualizacoes", LogController.store)
+//routes.delete("/data/:id", DataController.destroy) 
 routes.get("/atualizacoes", LogController.index)
+routes.post("/atualizacoes", LogController.store)
+
 
 module.exports = routes

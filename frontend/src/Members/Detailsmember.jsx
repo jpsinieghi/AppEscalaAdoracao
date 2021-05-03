@@ -34,7 +34,6 @@ export default function Detailsmember() {
     };
 
     const updateSchedule = async (data) => {
-        console.log(data)
         try {
             const res = await axios.put(`http://localhost:3001/api/data/${data._id}`, {
                 sid: 0,
@@ -42,6 +41,7 @@ export default function Detailsmember() {
                 status: 0
             });
             console.log(res.data);
+            
         } catch (err) {
             console.error(err);
         }
@@ -49,7 +49,27 @@ export default function Detailsmember() {
         const result = await axios(`http://localhost:3001/api/data/schedule/${data.sid}`,)
         dispatch({ type: 'MEMBERSCHEDULE', data: result.data.data, });
 
+        //SELECT * from DATA TOP 20 E colocar em state.atualizacoes
+        //const atualizacoes = await axios(`http://localhost:3001/api/atualizacoes/`,)
+        //dispatch({ type: 'ATUALIZACOES', data: atualizacoes.data.data, });
+
     }
+
+    const log2BD = async (data) => {
+        await axios({
+          method: 'post',
+          url: 'http://localhost:3001/api/atualizacoes',
+          data: {
+            dia: data.dia,
+            hora: data.hora,
+            sid: data.sid,
+            status: data.status
+          }
+        })
+    
+      }
+
+   
 
     if (!state.showmemberDetails) {
         return (<div><h1>Escolha um Membro</h1></div>)
