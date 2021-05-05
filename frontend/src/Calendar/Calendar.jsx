@@ -9,7 +9,7 @@ registerLocale("pt-BR", ptBR);
 
 export default function Calendar() {
 
-    const { dispatch } = useContext(AppContext);
+    const { state, dispatch } = useContext(AppContext);
 
     const changeInputValue = (newValue) => {
 
@@ -31,7 +31,7 @@ export default function Calendar() {
 
         </div>
     )
-
+    
 
 
 }

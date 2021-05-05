@@ -52,30 +52,32 @@ export default function Day() {
 
 
   useEffect(() => { fetchData() }, [state.daySelected])
-
+  //console.log(state.daySelected)
   if (!state.showHours) {
     return (<div><h1>
       Escolha uma data no Calendário.
     </h1></div>)
   }
-  if (dados.data.length === 0) {
-    dispatch({ type: 'SHOWDETAILS', data: false, })
-    return (<div className="Day"><Button primary="true" size="lg" onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
-  } else {
-    return (<div className="Day"><div>{(new Date(state.daySelected).toLocaleString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }))}</div>
-      {dados.data.map((item, index) => {
-        if (item.status === 0) {
-          return (
-            <div key={index}><Button variant="secondary" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)
-        }
-        else if (item.status === 1) {
-          return (
-            <div key={index}><Button variant="warning" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)
-        }
-        else {
-          return (<div key={index}><Button variant="success" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)
-        }
-      })}
-    </div>)
+  else {
+    if (dados.data.length === 0) {
+      dispatch({ type: 'SHOWDETAILS', data: false, })
+      return (<div className="Day"><Button primary="true" size="lg" onClick={() => putData(HORAS)}>Criar agenda para este dia</Button></div>)
+    } else {
+      return (<div className="Day"><div>{(new Date(state.daySelected).toLocaleString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }))}</div>
+        {dados.data.map((item, index) => {
+          if (item.status === 0) {
+            return (
+              <div key={index}><Button variant="secondary" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)
+          }
+          else if (item.status === 1) {
+            return (
+              <div key={index}><Button variant="warning" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)
+          }
+          else {
+            return (<div key={index}><Button variant="success" size="lg" block onClick={() => changeInputValue(item)}>{item.hora}:00</Button></div>)
+          }
+        })}
+      </div>)
+    }
   }
 }

@@ -32,7 +32,7 @@ export default function App() {
     hourselected: null,
     logEventos: [],
     memberSchedule: [],
-    atualizacoes: []
+    atualizacoes: [],
   };
 
   function reducer(state, action) {
@@ -69,7 +69,7 @@ export default function App() {
       
       case 'ATUALIZACOES':
           return update(state, { atualizacoes: { $set: action.data } });
-
+      
       default:
         return initialState;
     }

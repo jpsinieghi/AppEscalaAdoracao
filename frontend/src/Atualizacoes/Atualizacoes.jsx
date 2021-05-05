@@ -5,7 +5,7 @@ import { AppContext } from "../App"
 export default function Atualizacoes() {
     const { state } = useContext(AppContext);
     //const [dados, setDados] = useState({ data: [] })
-    console.log(state.atualizacoes)
+    //console.log(state.atualizacoes)
    
     
     return (

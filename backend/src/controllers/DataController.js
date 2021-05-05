@@ -7,7 +7,7 @@ module.exports = {
             if (err) return res.json({ success: false, error: err });
             // return res.json({ success: true, data: data });
             //console.log(req.params)
-            console.log(data)
+            //console.log(data)
             return res.json({ success: true, data: data });
           }).sort({hora: 1});
        
@@ -26,8 +26,8 @@ module.exports = {
        
     async update(req, res){
         const data = await Data.findByIdAndUpdate(req.params.id, req.body, {new: true})
-        console.log(req.params)
-        console.log(req.body)
+        //console.log(req.params)
+        //console.log(req.body)
         return res.json(data)
     }, 
       
@@ -42,7 +42,7 @@ module.exports = {
             if (err) return res.json({ success: false, error: err });
             // return res.json({ success: true, data: data });
             //console.log(req.params)
-            console.log(data)
+            //console.log(data)
             return res.json({ success: true, data: data });
           }).sort({dia: 1});
        

@@ -85,11 +85,12 @@ export default function Details() {
       
 
     }
-
+    
     if (!cadastrar) {
       const obj = state.hoursofdaySelected.find(item => item.hora === state.hourselected)
       if (obj.status === 0) {
-        return (<Button variant="primary" onClick={() => setCadastrar(true)}>Cadastrar Adorador</Button>)
+        return (
+        <Button variant="primary" onClick={() => setCadastrar(true)}>Cadastrar Adorador</Button>)
       }
       if (obj.status === 1) {
         return (<div><Button variant="warning" onClick={() => newStatus(2, obj.hora)}>Confirmar</Button>
@@ -104,7 +105,11 @@ export default function Details() {
           {/* <Button variant="primary" onClick={() => setCadastrar(true)}>Sugerir troca</Button> */}
         </div>)
       }
-    } else {
+    } else 
+      if(state.daySelected < (Date.now().valueOf() - 86400000)) {
+        return(<div>Não é possível escolher para data anterior a hoje</div>)
+      }
+      else {
       return (
         <Form.Group controlId="exampleForm.ControlSelect1">
           
@@ -119,6 +124,7 @@ export default function Details() {
         </Form.Group>
       )
     }
+  
   }
 
   return (<div>

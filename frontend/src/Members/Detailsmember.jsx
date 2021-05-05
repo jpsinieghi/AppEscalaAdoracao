@@ -27,7 +27,7 @@ export default function Detailsmember() {
                 nome: data.nome,
                 status: data.status
             });
-            console.log(res.data);
+            //console.log(res.data);
         } catch (err) {
             console.error(err);
         }
@@ -40,7 +40,7 @@ export default function Detailsmember() {
                 hora: data.hora,
                 status: 0
             });
-            console.log(res.data);
+            //console.log(res.data);
             
         } catch (err) {
             console.error(err);
@@ -95,14 +95,14 @@ export default function Detailsmember() {
 
                     <p>Datas e horarios de escala</p>
                     {state.memberSchedule.map((item, index) => {
-
+                        if(!(item.dia < (Date.now().valueOf() - 86400000))){
                         return (
                             <div key={index}>
                                 {(new Date(item.dia).toLocaleString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }))} as {item.hora}:00
                                 <input type="button" value="Excluir" onClick={() => updateSchedule(item)}></input>
                             </div>
 
-                        )
+                        )}
 
 
                     })}
